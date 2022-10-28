@@ -128,6 +128,179 @@
       </div>
     </div>
     <br />
+    <!--exp_plat-->
+    <div>
+      <label for="level" class="form-label"
+        ><strong
+          >Tienes experiencia en implementación y manejo de plataformas y/o
+          servicios, selecciona cuales</strong
+        ></label
+      >
+      <div
+        id="exp_plat_check_help"
+        class="form-text error"
+        v-for="error in v$.exp_plat_check.$errors"
+        :key="error.$uid"
+      >
+        {{ error.$message }}
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input bg-danger"
+          type="radio"
+          name="platCheck"
+          id="yes"
+          value="true"
+          v-model="formData.exp_plat_check"
+        />
+        <label class="form-check-label" for="yes"> Si </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input bg-danger"
+          type="radio"
+          name="platCheck"
+          id="no"
+          value="false"
+          v-model="formData.exp_plat_check"
+        />
+        <label class="form-check-label" for="no"> No </label>
+      </div>
+      <div
+        v-if="
+          formData.exp_plat_check == 'true' || formData.exp_plat_check == true
+        "
+      >
+        <h5>Si tu respuesta anterior fue si, selecciona caul</h5>
+        <div
+          id="email_help"
+          class="form-text error"
+          v-for="error in v$.exp_plat.$errors"
+          :key="error.$uid"
+        >
+          {{ error.$message }}
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input bg-danger"
+            type="radio"
+            name="platValue"
+            id="implementation"
+            value="1"
+            v-model="formData.exp_plat"
+          />
+          <label class="form-check-label" for="implementation">
+            Implementación
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input bg-danger"
+            type="radio"
+            name="platValue"
+            id="cyber_security"
+            value="2"
+            v-model="formData.exp_plat"
+          />
+          <label class="form-check-label" for="cyber_security">
+            Ciber Seguridad
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input bg-danger"
+            type="radio"
+            name="platValue"
+            id="cloud_services"
+            value="3"
+            v-model="formData.exp_plat"
+          />
+          <label class="form-check-label" for="cloud_services">
+            Cloud Services
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input bg-danger"
+            type="radio"
+            name="platValue"
+            id="infrastructure"
+            value="4"
+            v-model="formData.exp_plat"
+          />
+          <label class="form-check-label" for="infrastructure">
+            Infraestructura
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input bg-danger"
+            type="radio"
+            name="platValue"
+            id="structured_cabling"
+            value="5"
+            v-model="formData.exp_plat"
+          />
+          <label class="form-check-label" for="structured_cabling">
+            Cableado Estructurado
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input bg-danger"
+            type="radio"
+            name="platValue"
+            id="exp_plat"
+            value="exp_plat"
+            v-model="formData.exp_plat"
+          />
+          <label class="form-check-label" for="exp_plat"> Otro cual </label>
+        </div>
+        <div v-if="formData.exp_plat == 'exp_plat'">
+          <h6><strong>Escribe cual:</strong></h6>
+          <div
+            id="email_help"
+            class="form-text error"
+            v-for="error in v$.exp_plat_value.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            aria-describedby="city_help"
+            v-model="formData.exp_plat_value"
+          />
+        </div>
+      </div>
+    </div>
+    <br />
+    <div>
+      <label for="time_in_imp" class="form-label"
+        ><strong
+          >Cuanto tiempo de experiencia tienes en implementación de soluciones
+          de tecnología</strong
+        ></label
+      >
+      <div
+        id="time_in_imp_help"
+        class="form-text error"
+        v-for="error in v$.time_in_imp.$errors"
+        :key="error.$uid"
+      >
+        {{ error.$message }}
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="time_in_imp"
+        aria-describedby="time_in_imp_help"
+        v-model="formData.time_in_imp"
+      />
+    </div>
+    <br />
     <!--certs-->
     <div>
       <label class="form-label"
@@ -305,6 +478,7 @@ import useVuelidate from "@vuelidate/core";
 
 import {
   required,
+  requiredIf,
   helpers,
   minLength,
   maxLength,
@@ -320,11 +494,15 @@ const alertSotre = useAlertStore();
 const authstore = useAuthStore();
 
 const formData = ref({
-  name: "",
-  last_name: "",
-  country: "",
-  city: "",
-  level: "",
+  name: null,
+  last_name: null,
+  country: null,
+  city: null,
+  level: null,
+  exp_plat_check: null,
+  exp_plat: null,
+  exp_plat_value: null,
+  time_in_imp: null,
   certs: [],
   exp_in_pro_dir: "",
   exp_in_exec: "",
@@ -395,6 +573,35 @@ const rules = {
   level: {
     required: helpers.withMessage("Tu nivel es requerido", required),
   },
+  exp_plat_check: {
+    required: helpers.withMessage(
+      "La experiencia en plataformas es requerida",
+      required
+    ),
+  },
+  exp_plat: {
+    requiredIfTrue: helpers.withMessage(
+      "La plataformas es requerida",
+      requiredIf(() => {
+        return formData.value.exp_plat_check == "true";
+      })
+    ),
+  },
+  exp_plat_value: {
+    requiredIfexp_plat: helpers.withMessage(
+      "La plataforma es requerida",
+      requiredIf(() => {
+        return formData.value.exp_plat == "exp_plat";
+      })
+    ),
+  },
+  time_in_imp: {
+    required: helpers.withMessage("El tiempo es necesario", required),
+    maxLength: helpers.withMessage(
+      "El tiempo debe ser menor a 30 dígitos",
+      maxLength(30)
+    ),
+  },
   certs: {
     maxLength: helpers.withMessage(
       "Los certificados deben de ser menor a 14 carácteres",
@@ -432,9 +639,15 @@ const submitForm = async () => {
   // Check if everything is alright
   const result = await v$.value.$validate();
   // If everything is alright
+
   if (result) {
     formData.value.exp_in_exec = formData.value.exp_in_exec === "true"; // This, is to convert to boolean, the text in exp_in_exect
     formData.value.exp_in_pro_dir = formData.value.exp_in_pro_dir === "true"; // This, is to convert to boolean, the text in exp_in_pro_dir
+    formData.value.exp_plat_check = formData.value.exp_plat_check === "true";
+    if (!formData.value.exp_plat_check) {
+      formData.value.exp_plat_value = null;
+      formData.value.exp_plat = null;
+    }
     // Call postForm
     await postForm();
     // Reset modal
@@ -459,18 +672,23 @@ const postForm = async () => {
       // If there's any error, set an alert with err.response.data
       alertSotre.setAlert("alert-danger", err.response.data);
     });
+  modalStore.resetModal();
 };
 
 const saveCerts = () => {
   // Check if input has more than 0 and less of 14 characters
-  if (cert_value.value.length > 0 && cert_value.value.length < 14) {
+  if (
+    cert_value.value &&
+    cert_value.value.length > 0 &&
+    cert_value.value.length < 14
+  ) {
     // Push input's content to const certs
     formData.value.certs.push({ cert: cert_value.value });
     // Clear input
     cert_value.value = "";
     // And, set the alert to null
     cert_value_error.value = null;
-  } else if (cert_value.value.length > 14) {
+  } else if (cert_value.value && cert_value.value.length > 14) {
     // If input has more than 14 characteres, set an alert
     cert_value_error.value = "El certificado debe ser menos a 14 digítos*";
   }

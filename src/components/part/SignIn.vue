@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <form>
+      <form class="px-5">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Correo:</label>
           <input

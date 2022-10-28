@@ -2,7 +2,7 @@
   <div>
     <AlertComp />
     <ModalComp />
-    <NavBar v-if="user" :key="navBarKey" />
+    <NavBar :key="navBarKey" />
     <router-view />
     <FooterComp v-if="user" />
   </div>
@@ -35,6 +35,5 @@ const { navBarKey } = storeToRefs(uiStore);
 @import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
 * {
   font-family: "Asap", sans-serif;
-  border-radius: 0 !important;
 }
 </style>

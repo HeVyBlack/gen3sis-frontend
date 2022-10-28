@@ -4,10 +4,9 @@
       <div class="col-sm-12 col-md-6">
         <div class="bg-container">
           <img
-            src="../../assets/isotipo.png"
+            src="../../assets/partner_photo.jpg"
             alt="bg"
             class="img-fluid bg"
-            width="400"
           />
         </div>
       </div>
@@ -26,10 +25,13 @@
 
 <style scoped>
 #tittle {
-  background-color: #1fcfcc;
+  color: #d80e2c;
+  background-color: #e6e6e6;
+  border-radius: 5px !important;
 }
 
 #tittle p {
+  color: black !important;
   margin-top: 0.6rem;
   font-size: 1.1rem;
   font-family: "Nunito", sans-serif;
