@@ -1,6 +1,14 @@
 <template>
   <div class="container p-5 text-center" v-if="user">
     <div class="row">
+      <div class="col" v-if="user.verified_info">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Ya está todo listo!</h4>
+          <div>
+            <p class="mb-0">No hay nada más que hacer</p>
+          </div>
+        </div>
+      </div>
       <div class="col-sm-12 col-lg-3">
         <ul class="list-group">
           <li class="list-group-item" v-if="!user.verified_info">
@@ -9,14 +17,6 @@
                 >Verifica tu info
                 <font-awesome-icon icon="fa-solid fa-caret-right"
               /></router-link>
-            </h6>
-          </li>
-          <li class="list-group-item">
-            <h6>
-              <a href="#"
-                >Cambia tu e-mail
-                <font-awesome-icon icon="fa-solid fa-caret-right"
-              /></a>
             </h6>
           </li>
         </ul>

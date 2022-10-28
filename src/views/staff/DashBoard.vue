@@ -4,4 +4,8 @@
 
 <script setup></script>
 
-<style scoped></style>
+<style>
+* {
+  font-family: "Signika Negative", sans-serif;
+}
+</style>

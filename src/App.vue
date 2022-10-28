@@ -29,7 +29,12 @@ const { navBarKey } = storeToRefs(uiStore);
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dosis&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
 * {
+  font-family: "Asap", sans-serif;
   border-radius: 0 !important;
 }
 </style>

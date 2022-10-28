@@ -213,7 +213,14 @@
             </button>
           </div>
           <div class="col-sm-12 col-lg-4 p-4" v-else>
-            <h5>*Sin peticiones*</h5>
+            <h5>
+              <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">Sin peticiones...</h4>
+                <div>
+                  <p class="mb-0">El usuario no tiene petición alguna</p>
+                </div>
+              </div>
+            </h5>
           </div>
         </div>
       </div>

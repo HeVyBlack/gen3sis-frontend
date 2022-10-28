@@ -24,7 +24,7 @@
               href="http://www.gen3sis.net"
               target="_blank"
               rel="noopener noreferrer"
-              class="link"
+              class="link text-dark"
               >Servicios</a
             >
             <ul class="navbar-nav ms-auto">

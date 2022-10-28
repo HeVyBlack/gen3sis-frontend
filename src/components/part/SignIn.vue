@@ -22,7 +22,7 @@
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label"
-            >Contraseña</label
+            >Contraseña:</label
           >
           <input
             type="password"
@@ -140,5 +140,9 @@ const submitAuthForm = async () => {
 <style scoped>
 .error {
   color: red;
+}
+
+* {
+  font-family: "Dosis", sans-serif !important;
 }
 </style>
