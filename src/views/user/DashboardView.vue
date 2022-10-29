@@ -19,6 +19,20 @@
               /></router-link>
             </h6>
           </li>
+          <li class="list-group-item" v-if="user.type == 'engineer'">
+            <img
+              src="../../assets/1932-Economic_research.jpg"
+              alt="img"
+              class="img-fluid"
+            />
+          </li>
+          <li class="list-group-item" v-if="user.type == 'partner'">
+            <img
+              src="../../assets/9ed04e320533cd9e9b270ec24547ecf0(1).jpg"
+              alt="img"
+              class="img-fluid"
+            />
+          </li>
         </ul>
       </div>
       <div class="col">
