@@ -454,7 +454,7 @@
           type="radio"
           name="platCheck"
           id="yes"
-          value="true"
+          :value="true"
           v-model="formData.exp_plat_check"
         />
         <label class="form-check-label" for="yes"> Si </label>
@@ -465,7 +465,7 @@
           type="radio"
           name="platCheck"
           id="no"
-          value="false"
+          :value="false"
           v-model="formData.exp_plat_check"
         />
         <label class="form-check-label" for="no"> No </label>
@@ -557,19 +557,14 @@
 
         <div v-if="formData.exp_plat.other">
           <h6><strong>Escribe cuales son:</strong></h6>
-          <div
-            id="email_help"
-            class="form-text error"
-            v-for="error in v$.exp_plat_value.$errors"
-            :key="error.$uid"
-          >
-            {{ error.$message }}
+          <div id="email_help" class="form-text error">
+            {{ exp_plat_value_error }}
           </div>
           <input
             type="text"
             class="form-control"
-            id="city"
-            aria-describedby="city_help"
+            id="exp_plat_value"
+            aria-describedby="exp_plat_value_help"
             v-model="exp_plat_value"
           />
         </div>
@@ -669,7 +664,7 @@
             type="radio"
             name="exp_in_pro_dir_check"
             id="exp_in_pro_dir_check"
-            value="true"
+            :value="true"
             v-model="formData.exp_in_pro_dir"
           />
           <label class="form-check-label" for="exp_in_pro_dir_check">
@@ -682,7 +677,7 @@
             type="radio"
             name="exp_in_pro_dir_check"
             id="exp_in_pro_dir_check1"
-            value="false"
+            :value="false"
             v-model="formData.exp_in_pro_dir"
           />
           <label class="form-check-label" for="exp_in_pro_dir_check1">
@@ -712,7 +707,7 @@
             type="radio"
             name="exp_in_exec_check"
             id="exp_in_exec_check"
-            value="true"
+            :value="true"
             v-model="formData.exp_in_exec"
           />
           <label class="form-check-label" for="exp_in_exec_check"> Si </label>
@@ -723,7 +718,7 @@
             type="radio"
             name="exp_in_exec_check"
             id="exp_in_exec_check1"
-            value="false"
+            :value="false"
             v-model="formData.exp_in_exec"
           />
           <label class="form-check-label" for="exp_in_exec_check1"> No </label>
@@ -831,6 +826,7 @@ const formData = ref({
 });
 
 const exp_plat_value = ref(null);
+const exp_plat_value_error = ref(null);
 
 // Cert value, this, will contains the cert input
 const cert_value = ref(null);
@@ -909,14 +905,7 @@ const rules = {
       })
     ),
   },
-  exp_plat_value: {
-    requiredIfexp_plat: helpers.withMessage(
-      "La plataforma es requerida",
-      requiredIf(() => {
-        return formData.value.exp_plat == "exp_plat";
-      })
-    ),
-  },
+
   time_in_imp: {
     required: helpers.withMessage("El tiempo es necesario", required),
     maxLength: helpers.withMessage(
@@ -955,21 +944,29 @@ const v$ = useVuelidate(rules, formData);
 const cert_value_error = ref(null);
 
 const submitForm = async () => {
+  let formToSubmit = formData.value;
   // Set modal
   modalStore.setType("wait_offcanvas");
 
   // Check if everything is alright
   const result = await v$.value.$validate();
   // If everything is alright
-
-  if (result) {
-    formData.value.exp_in_exec = formData.value.exp_in_exec === "true"; // This, is to convert to boolean, the text in exp_in_exect
-    formData.value.exp_in_pro_dir = formData.value.exp_in_pro_dir === "true"; // This, is to convert to boolean, the text in exp_in_pro_dir
-    formData.value.exp_plat_check = formData.value.exp_plat_check === "true";
-    if (!formData.value.exp_plat_check) {
-      formData.value.exp_plat_value = null;
-      formData.value.exp_plat = null;
+  if (formToSubmit.exp_plat.other) {
+    if (exp_plat_value.value.length < 3 || exp_plat_value.value.length > 80) {
+      exp_plat_value_error.value =
+        "El valor debe estar entre 3 y 80 carácteres";
+      modalStore.resetModal();
+      return;
+    } else {
+      formToSubmit.exp_plat.other = exp_plat_value.value;
     }
+  }
+  if (result) {
+    if (!formToSubmit.exp_plat_check) {
+      formToSubmit.exp_plat_value = null;
+      formToSubmit.exp_plat = null;
+    }
+
     // Call postForm
     await postForm();
     // Reset modal
@@ -980,8 +977,9 @@ const submitForm = async () => {
 };
 
 const postForm = async () => {
+  let formToSubmit = formData.value;
   await axios
-    .post("eng/post-infoform", formData.value)
+    .post("eng/post-infoform", formToSubmit)
     .then(async (res) => {
       // Set an alert with res.ddta
       alertSotre.setAlert("alert-success", res.data);

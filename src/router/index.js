@@ -36,6 +36,7 @@ import StaffDashBoard from "../views/staff/DashBoard.vue";
 
 // Comps
 import StaffSearchUsers from "../components/staff/SearchUsers.vue";
+import ManageTickets from "../components/staff/ManageTickets.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -50,12 +51,16 @@ const router = createRouter({
           path: "dashboard",
           name: "staff-dashboard",
           component: StaffDashBoard,
-          redirect: { name: "staff-search-users" },
           children: [
             {
               path: "search-users",
               name: "staff-search-users",
               component: StaffSearchUsers,
+            },
+            {
+              path: "manage-tickets",
+              name: "staff-manage-tickets",
+              component: ManageTickets,
             },
           ],
         },
