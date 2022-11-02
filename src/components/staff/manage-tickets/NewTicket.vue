@@ -1,39 +1,39 @@
 <template>
   <div class="mb-3">
     <h4><strong>Nuevo Ticket</strong></h4>
-    <label for="email_ing" class="form-label">Email de ingeniero</label>
+    <label for="cod_ing" class="form-label">Código de ingeniero</label>
     <div
       id="emailHelp"
       class="form-text error"
-      v-for="error in v$.email_ing.$errors"
+      v-for="error in v$.cod_ing.$errors"
       :key="error.$uid"
     >
       {{ error.$message }}*
     </div>
     <input
-      type="email"
+      type="number"
       class="form-control"
-      id="email_ing"
+      id="cod_ing"
       placeholder="Ingresa el código ingeniero"
-      v-model="newTicket.email_ing"
+      v-model="newTicket.cod_ing"
     />
   </div>
   <div class="mb-3">
-    <label for="email_part" class="form-label">Email de partner</label>
+    <label for="cod_part" class="form-label">Código de partner</label>
     <div
       id="emailHelp"
       class="form-text error"
-      v-for="error in v$.email_part.$errors"
+      v-for="error in v$.cod_part.$errors"
       :key="error.$uid"
     >
       {{ error.$message }}*
     </div>
     <input
-      type="email"
+      type="number"
       class="form-control"
-      id="email_part"
+      id="cod_part"
       placeholder="Ingresa el código partner"
-      v-model="newTicket.email_part"
+      v-model="newTicket.cod_part"
     />
   </div>
   <div class="mb-3">
@@ -140,10 +140,10 @@
           <div class="col">
             <ul class="list-group">
               <li class="list-group-item">
-                <strong>Email de ingeniero: </strong> {{ newTicket.email_ing }}
+                <strong>Email de ingeniero: </strong> {{ newTicket.cod_ing }}
               </li>
               <li class="list-group-item">
-                <strong>Email de partner: </strong> {{ newTicket.email_part }}
+                <strong>Email de partner: </strong> {{ newTicket.cod_part }}
               </li>
               <li class="list-group-item">
                 <strong>Fecha inicialización: </strong>
@@ -177,13 +177,13 @@
 import axios from "axios";
 import { ref } from "vue";
 import useVuelidate from "@vuelidate/core";
-import { required, email, helpers, maxLength } from "@vuelidate/validators";
+import { required, helpers, maxLength, minLength } from "@vuelidate/validators";
 import { useModalStore } from "../../../stores/ui/modal";
 import { useAlertStore } from "../../../stores/ui/alert";
 
 const newTicket = ref({
-  email_ing: null,
-  email_part: null,
+  cod_ing: null,
+  cod_part: null,
   init_date: null,
   fin_date: null,
   hours: null,
@@ -195,13 +195,33 @@ const modalStore = useModalStore();
 const alertStore = useAlertStore();
 
 const rules = {
-  email_ing: {
-    required: helpers.withMessage("El email es necesario", required),
-    email: helpers.withMessage("El email debe ser válido", email),
+  cod_ing: {
+    required: helpers.withMessage(
+      "El código de ingeniero es necesario",
+      required
+    ),
+    minLength: helpers.withMessage(
+      "El código de ingeniero debe ser de 10 digítos",
+      minLength(10)
+    ),
+    maxLength: helpers.withMessage(
+      "El código de ingeniero debe ser de 10 digítos",
+      maxLength(10)
+    ),
   },
-  email_part: {
-    required: helpers.withMessage("El email es necesario", required),
-    email: helpers.withMessage("El email debe ser válido", email),
+  cod_part: {
+    required: helpers.withMessage(
+      "El código de partner es necesario",
+      required
+    ),
+    minLength: helpers.withMessage(
+      "El código de partner debe ser de 10 digítos",
+      minLength(10)
+    ),
+    maxLength: helpers.withMessage(
+      "El código de partner debe ser de 10 digítos",
+      maxLength(10)
+    ),
   },
   init_date: {
     required: helpers.withMessage("La fecha es requerida", required),
@@ -210,7 +230,11 @@ const rules = {
     required: helpers.withMessage("La fecha es requerida", required),
   },
   hours: {
-    required: helpers.withMessage("La(s) horas es requerida", required),
+    required: helpers.withMessage("La(s) horas son requerida", required),
+    maxLength: helpers.withMessage(
+      "La hora no puede ser mayor a 6 dígitos",
+      maxLength(6)
+    ),
   },
   state: {
     required: helpers.withMessage("El estado es requerido", required),
@@ -226,6 +250,7 @@ const rules = {
 const v$ = useVuelidate(rules, newTicket);
 
 const submitTicket = async () => {
+  alertStore.resetAlert();
   const result = await v$.value.$validate();
   if (result) {
     showModal.value = !showModal.value;
@@ -237,9 +262,11 @@ const postTicket = async () => {
   await axios
     .post("staff/set-ticket", newTicket.value)
     .then((res) => {
-      if (res.data && res.data.success_msg) {
+      if (res.data && res.data.success_msg && res.data.num_ticket) {
         modalStore.resetModal();
-        alertStore.setAlert("alert-success", res.data);
+        alertStore.setAlert("alert-success", [
+          `${res.data.success_msg} || Número de ticket: ${res.data.num_ticket}`,
+        ]);
         showModal.value = !showModal.value;
       }
     })
@@ -247,9 +274,9 @@ const postTicket = async () => {
       modalStore.resetModal();
       showModal.value = !showModal.value;
       // If there's any error
-      if (err.response.data.error_msg) {
+      if (err.response.data) {
         // If there's an error_msg, set it as an alert
-        alertStore.setAlert("alert-danger", [err.response.data.error_msg]);
+        alertStore.setAlert("alert-danger", err.response.data);
       } else alertStore.setAlert("alert-danger", ["Hubo un error"]); // Else, just put an alert saying, there's an error
     });
 };

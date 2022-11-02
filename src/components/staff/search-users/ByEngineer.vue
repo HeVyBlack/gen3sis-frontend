@@ -718,6 +718,7 @@
                 <li class="list-group-item">
                   Usuario verificado: {{ item.user_checked }}
                 </li>
+                <li class="list-group-item">Código: {{ item.id_code }}</li>
               </ul>
             </div>
             <div class="col" v-if="item.verified_info">
@@ -744,6 +745,29 @@
           </div>
         </div>
       </div>
+    </template>
+    <template v-if="Object.keys(paginateOptions).length > 0">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li
+            class="page-item"
+            @click="changePage(paginateOptions.prevPage)"
+            v-if="paginateOptions.hasPrevPage"
+          >
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item" v-if="paginateOptions.page">
+            <a class="page-link">{{ paginateOptions.page }}</a>
+          </li>
+          <li
+            class="page-item"
+            @click="changePage(paginateOptions.nextPage)"
+            v-if="paginateOptions.hasNextPage"
+          >
+            <a class="page-link">Next</a>
+          </li>
+        </ul>
+      </nav>
     </template>
   </div>
 </template>
@@ -808,7 +832,6 @@ const getUsers = async () => {
   await axios
     .get(url)
     .then((res) => {
-      console.log(res.data);
       // If data docs exists and, has users
       if (res.data.docs && res.data.docs.length > 0) {
         // Save users in users const
@@ -822,6 +845,8 @@ const getUsers = async () => {
         paginateOptions.value.nextPage = res.data.nextPage;
         // totalPages
         paginateOptions.value.totalPages = res.data.totalPages;
+        // Actual page
+        paginateOptions.value.page = res.data.page;
       } else alertStore.setAlert("alert-danger", ["No hay usuarios"]); // Else, set an alert
     })
     .catch((err) => {
@@ -840,6 +865,7 @@ const changePage = async (page) => {
   const res = await axios.get(url + `page=${page}`);
   // Reset modal
   modalStore.resetModal();
+  console.log(res.data);
   // If there's users found, set paginateOptios, and set users found in users const
   if (res.data.docs.length > 0) {
     users.value = res.data.docs;
@@ -854,6 +880,8 @@ const changePage = async (page) => {
     paginateOptions.value.totalPages = res.data.totalPages;
     // prevPage
     paginateOptions.value.prevPage = res.data.prevPage;
+    // Actual page
+    paginateOptions.value.page = res.data.page;
   } else {
     // Else, show an alert
     alertStore.setAlert("alert-danger", ["No hay usuarios"]);

@@ -50,6 +50,7 @@
                 <li class="list-group-item">
                   Usuario verificado: {{ user.user_checked }}
                 </li>
+                <li class="list-group-item">Código: {{ user.id_code }}</li>
               </ul>
             </ul>
             <template v-if="user.type == 'engineer' && user.verified_info">
