@@ -1,11 +1,11 @@
 <template>
   <div class="mb-3">
     <h4><strong>Nuevo Ticket</strong></h4>
-    <label for="cod_ing" class="form-label">Código de ingeniero</label>
+    <label for="cod_eng" class="form-label">Código de ingeniero</label>
     <div
       id="emailHelp"
       class="form-text error"
-      v-for="error in v$.cod_ing.$errors"
+      v-for="error in v$.cod_eng.$errors"
       :key="error.$uid"
     >
       {{ error.$message }}*
@@ -13,9 +13,9 @@
     <input
       type="number"
       class="form-control"
-      id="cod_ing"
+      id="cod_eng"
       placeholder="Ingresa el código ingeniero"
-      v-model="newTicket.cod_ing"
+      v-model="newTicket.cod_eng"
     />
   </div>
   <div class="mb-3">
@@ -129,7 +129,7 @@
     />
   </div>
 
-  <button class="btn btn-dark" @click="submitTicket">Enviar</button>
+  <label class="btn btn-dark" @click="submitTicket">Enviar</label>
   <va-modal v-model="showModal" hide-default-actions
     ><va-card-title> Seguro? </va-card-title>
     <va-card-content>
@@ -140,7 +140,7 @@
           <div class="col">
             <ul class="list-group">
               <li class="list-group-item">
-                <strong>Email de ingeniero: </strong> {{ newTicket.cod_ing }}
+                <strong>Email de ingeniero: </strong> {{ newTicket.cod_eng }}
               </li>
               <li class="list-group-item">
                 <strong>Email de partner: </strong> {{ newTicket.cod_part }}
@@ -182,7 +182,7 @@ import { useModalStore } from "../../../stores/ui/modal";
 import { useAlertStore } from "../../../stores/ui/alert";
 
 const newTicket = ref({
-  cod_ing: null,
+  cod_eng: null,
   cod_part: null,
   init_date: null,
   fin_date: null,
@@ -195,17 +195,17 @@ const modalStore = useModalStore();
 const alertStore = useAlertStore();
 
 const rules = {
-  cod_ing: {
+  cod_eng: {
     required: helpers.withMessage(
       "El código de ingeniero es necesario",
       required
     ),
     minLength: helpers.withMessage(
-      "El código de ingeniero debe ser de 10 digítos",
+      "El código de ingeniero no puede ser menor a 10 digítos",
       minLength(10)
     ),
     maxLength: helpers.withMessage(
-      "El código de ingeniero debe ser de 10 digítos",
+      "El código de ingeniero no puede ser mayor a 10 digítos",
       maxLength(10)
     ),
   },
@@ -215,11 +215,11 @@ const rules = {
       required
     ),
     minLength: helpers.withMessage(
-      "El código de partner debe ser de 10 digítos",
+      "El código de partner no puede ser menor a 10 digítos",
       minLength(10)
     ),
     maxLength: helpers.withMessage(
-      "El código de partner debe ser de 10 digítos",
+      "El código de partner no puede ser mayor a 10 digítos",
       maxLength(10)
     ),
   },

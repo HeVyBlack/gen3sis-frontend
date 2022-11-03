@@ -1,20 +1,20 @@
 <template>
   <div class="container p-5 text-center" v-if="user">
     <div class="row">
-      <div class="col" v-if="user.verified_info">
-        <div class="alert alert-success" role="alert">
-          <h4 class="alert-heading">Ya está todo listo!</h4>
-          <div>
-            <p class="mb-0">No hay nada más que hacer</p>
-          </div>
-        </div>
-      </div>
       <div class="col-sm-12 col-lg-3">
-        <ul class="list-group">
+        <ul class="list-group list-group-flush">
           <li class="list-group-item" v-if="!user.verified_info">
             <h6>
               <router-link :to="{ name: 'dash-verify-info' }"
                 >Verifica tu info
+                <font-awesome-icon icon="fa-solid fa-caret-right"
+              /></router-link>
+            </h6>
+          </li>
+          <li class="list-group-item" v-if="user.verified_info">
+            <h6>
+              <router-link :to="{ name: 'get-tickets' }"
+                >Consulta tus tickets
                 <font-awesome-icon icon="fa-solid fa-caret-right"
               /></router-link>
             </h6>

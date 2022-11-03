@@ -337,6 +337,7 @@ const updateUserPost = async () => {
       }
     })
     .catch((err) => {
+      console.log(err.response);
       if (err.response.data.error_msg) {
         // If there's an error_msg, set it as an alert
         alertStore.setAlert("alert-danger", [err.response.data.error_msg]);

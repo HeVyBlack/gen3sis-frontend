@@ -13,6 +13,11 @@
                       <p class="mb-0">
                         Ya estás de alta! Ahora, hay que esperar a que te
                         lleguen casos ;)
+                        <router-link
+                          :to="{ name: 'get-tickets' }"
+                          class="btn btn-success mt-2"
+                          >Mira tus tickets</router-link
+                        >
                       </p>
                     </div>
                   </div>

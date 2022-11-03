@@ -28,6 +28,7 @@ import ConfirmEmail from "../views/user/ConfirmEmail.vue";
 
 // Comps
 import DashVerifyInfo from "../components/user/dashboard/VerifyInfo.vue";
+import getTickets from "../components/user/dashboard/GetTickets.vue";
 
 // Staff
 // Views
@@ -102,6 +103,11 @@ const router = createRouter({
           name: "dash-verify-info",
           component: DashVerifyInfo,
         },
+        {
+          path: "get-tickets",
+          name: "get-tickets",
+          component: getTickets,
+        },
       ],
     },
     {
@@ -156,11 +162,21 @@ router.beforeEach((to) => {
     return "/";
   }
 
+  // Only verified_info
+  const onlyVeriInfo = ["/dashboard/get-tickets"];
+
+  if (onlyVeriInfo.includes(to.path)) {
+    if (!user.value || !user.value.verified_info) {
+      return "/";
+    }
+  }
+
   // Only staff people
   const onlyStaff = [
     "/staff",
     "/staff/dashboard",
     "/staff/dashboard/search-users",
+    "/staff/dashboard/manage-tickets",
   ];
   // If route that the user is goint to, is onlyStaff, and, user hasn't staff_token
   if (onlyStaff.includes(to.path) && !staff_token.value) {
