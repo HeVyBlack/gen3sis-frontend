@@ -1,7 +1,7 @@
 <template v-if="user">
   <div class="row">
     <div class="col">
-      <div v-if="tickets">
+      <template v-if="tickets">
         <va-list>
           <va-list-label> tickets </va-list-label>
 
@@ -32,7 +32,30 @@
             </va-list-item-section>
           </va-list-item>
         </va-list>
-      </div>
+        <template v-if="Object.keys(navOptions).length > 0">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li
+                class="page-item"
+                @click="changePage(navOptions.prevPage)"
+                v-if="navOptions.hasPrevPage"
+              >
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item" v-if="navOptions.page">
+                <a class="page-link">{{ navOptions.page }}</a>
+              </li>
+              <li
+                class="page-item"
+                @click="changePage(navOptions.nextPage)"
+                v-if="navOptions.hasNextPage"
+              >
+                <a class="page-link">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </template>
+      </template>
     </div>
     <template>
       <va-modal v-model="showModal" no-padding>
@@ -90,13 +113,17 @@ const modalStore = useModalStore();
 const alertStore = useAlertStore();
 
 const { user } = storeToRefs(authStore);
-
+const navOptions = ref({});
 onMounted(() => {
   modalStore.setType("wait_offcanvas");
   axios
     .get("/user/get-tickets")
     .then((res) => {
-      tickets.value = res.data.docs;
+      for (const i in res.data) {
+        if (i == "docs") {
+          tickets.value = res.data.docs;
+        } else navOptions.value[i] = res.data[i];
+      }
     })
     .catch((err) => {
       modalStore.resetModal();
@@ -117,6 +144,29 @@ const ticket = ref(null);
 const initModal = (item) => {
   ticket.value = item;
   showModal.value = !showModal.value;
+};
+
+const changePage = async (page) => {
+  modalStore.setType("wait_offcanvas");
+  axios
+    .get(`/user/get-tickets?page=${page}`)
+    .then((res) => {
+      for (const i in res.data) {
+        if (i == "docs") {
+          tickets.value = res.data.docs;
+        } else navOptions.value[i] = res.data[i];
+      }
+    })
+    .catch((err) => {
+      modalStore.resetModal();
+      showModal.value = !showModal.value;
+      // If there's any error
+      if (err.response.data) {
+        // If there's an error_msg, set it as an alert
+        alertStore.setAlert("alert-danger", err.response.data);
+      } else alertStore.setAlert("alert-danger", ["Hubo un error"]); // Else, just put an alert saying, there's an error
+    });
+  modalStore.resetModal();
 };
 </script>
 

@@ -27,26 +27,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 const app = createApp(App);
 
 app.use(createPinia());
-app.use(
-  createVuestic({
-    config: {
-      colors: {
-        // Default colors
-        primary: "#23e066",
-        secondary: "#002c85",
-        success: "#40e583",
-        info: "#2c82e0",
-        danger: "#e34b4a",
-        warning: "#ffc200",
-        gray: "#babfc2",
-        dark: "#34495e",
 
-        // Custom colors
-        yourCustomColor: "#d0f55d",
-      },
-    },
-  })
-);
 // --> After createPinia(), set const, to use stores <--
 const authStore = useAuthStore();
 
@@ -63,6 +44,7 @@ authStore.attemp(localStorage.getItem("token")).then(() => {
 
   // Now, initialize app -->
   app.use(router);
+  app.use(createVuestic());
   // Init components
   app.component("font-awesome-icon", FontAwesomeIcon);
   // Mount app in html's #app

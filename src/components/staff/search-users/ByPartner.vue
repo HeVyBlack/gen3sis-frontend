@@ -197,7 +197,7 @@
                 <li class="list-group-item">Código: {{ item.id_code }}</li>
               </ul>
             </div>
-            <div class="col" v-if="item.verified_info">
+            <div class="col" v-if="item.verified_info && item.info">
               <h5>Cuenta</h5>
               <ul class="list-group">
                 <li class="list-group-item">
@@ -349,19 +349,11 @@ const getUsers = async () => {
     .then((res) => {
       // If data docs exists and, has users
       if (res.data.docs && res.data.docs.length > 0) {
-        // Save users in users const
-        users.value = res.data.docs;
-        // Information giving by mongoose paginate -->
-        // hasNextPage
-        paginateOptions.value.hasNextPage = res.data.hasNextPage;
-        // hasPrevePage
-        paginateOptions.value.hasPrevPage = res.data.hasPrevPage;
-        // nextPage
-        paginateOptions.value.nextPage = res.data.nextPage;
-        // totalPages
-        paginateOptions.value.totalPages = res.data.totalPages;
-        // Actual page
-        paginateOptions.value.page = res.data.page;
+        for (const i in res.data) {
+          if (i == "docs") {
+            users.value = res.data.docs;
+          } else paginateOptions.value[i] = res.data[i];
+        }
       } else alertStore.setAlert("alert-danger", ["No hay usuarios"]); // Else, set an alert
     })
     .catch((err) => {
@@ -377,25 +369,23 @@ const changePage = async (page) => {
   // Set off canvas
   modalStore.setType("wait_offcanvas");
   // Call the url, and put it the page that the user wants to go
-  const res = await axios.get(url + `page=${page}`);
+  const res = await axios.get(url + `page=${page}`).catch((err) => {
+    modalStore.resetModal();
+    // If there's any error
+    if (err.response.data) {
+      // If there's an error_msg, set it as an alert
+      alertStore.setAlert("alert-danger", err.response.data);
+    } else alertStore.setAlert("alert-danger", ["Hubo un error"]); // Else, just put an alert saying, there's an error
+  });
   // Reset modal
   modalStore.resetModal();
   // If there's users found, set paginateOptios, and set users found in users const
   if (res.data.docs.length > 0) {
-    users.value = res.data.docs;
-    // Information giving by mongoose paginate -->
-    // hasNextPage
-    paginateOptions.value.hasNextPage = res.data.hasNextPage;
-    // hasPrevPage
-    paginateOptions.value.hasPrevPage = res.data.hasPrevPage;
-    // nextPage
-    paginateOptions.value.nextPage = res.data.nextPage;
-    // totalPages
-    paginateOptions.value.totalPages = res.data.totalPages;
-    // prevPage
-    paginateOptions.value.prevPage = res.data.prevPage;
-    // Actual page
-    paginateOptions.value.page = res.data.page;
+    for (const i in res.data) {
+      if (i == "docs") {
+        users.value = res.data.docs;
+      } else paginateOptions.value[i] = res.data[i];
+    }
   } else {
     // Else, show an alert
     alertStore.setAlert("alert-danger", ["No hay usuarios"]);
@@ -403,4 +393,8 @@ const changePage = async (page) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.page-item:hover {
+  cursor: pointer;
+}
+</style>

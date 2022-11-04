@@ -16,7 +16,6 @@
                 <font-awesome-icon icon="fa-solid fa-chevron-right"
               /></router-link>
             </li>
-            <li class="list-group-item">A third item</li>
           </ul>
         </div>
       </div>
