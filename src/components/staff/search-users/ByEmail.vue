@@ -32,9 +32,24 @@
       <div class="container bg-light border border-danger my-5 text-center">
         <div class="row">
           <div class="col-sm-12 col-lg-6 p-3">
-            <button type="submit" class="btn btn-dark" @click="clear">
+            <button type="submit" class="btn btn-dark mx-1" @click="clear">
               Limpiar
             </button>
+            <template v-if="user.user_checked">
+              <button
+                type="submit"
+                class="btn btn-dark mx-1"
+                @:click="
+                  user.type == 'engineer'
+                    ? staffStore.setEng(user)
+                    : user.type == 'partner'
+                    ? staffStore.setPart(user)
+                    : null
+                "
+              >
+                Crear ticket
+              </button>
+            </template>
             <br />
             <br />
             <ul class="list-group">
@@ -53,7 +68,9 @@
                 <li class="list-group-item">Código: {{ user.id_code }}</li>
               </ul>
             </ul>
-            <template v-if="user.type == 'engineer' && user.verified_info">
+            <template
+              v-if="user.type == 'engineer' && user.verified_info && user.info"
+            >
               <div class="container bg-light border border-danger py-3 my-3">
                 <div class="row">
                   <h5>Info:</h5>
@@ -100,7 +117,9 @@
                 </div>
               </div>
             </template>
-            <template v-if="user.type == 'partner' && user.verified_info">
+            <template
+              v-if="user.type == 'partner' && user.verified_info && user.info"
+            >
               <div class="container bg-light border border-danger my-5">
                 <div class="row">
                   <div class="col">
@@ -239,14 +258,14 @@ import { useModalStore } from "../../../stores/ui/modal";
 import { useRoute } from "vue-router";
 import { onMounted } from "vue";
 import { validate } from "email-validator";
-
+import { useStaffStore } from "../../../stores/staff";
 // Vuelidate
 import useVuelidate from "@vuelidate/core";
 
 import { required, email, helpers } from "@vuelidate/validators";
 
 const route = useRoute();
-
+const staffStore = useStaffStore();
 const alertStore = useAlertStore();
 const modalStore = useModalStore();
 

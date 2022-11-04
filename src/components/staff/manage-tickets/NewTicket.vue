@@ -175,11 +175,13 @@
 
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { storeToRefs } from "pinia";
 import useVuelidate from "@vuelidate/core";
 import { required, helpers, maxLength, minLength } from "@vuelidate/validators";
 import { useModalStore } from "../../../stores/ui/modal";
 import { useAlertStore } from "../../../stores/ui/alert";
+import { useStaffStore } from "../../../stores/staff";
 
 const newTicket = ref({
   cod_eng: null,
@@ -193,6 +195,17 @@ const newTicket = ref({
 
 const modalStore = useModalStore();
 const alertStore = useAlertStore();
+const staffStore = useStaffStore();
+
+const { ticket } = storeToRefs(staffStore);
+
+onMounted(() => {
+  if (ticket.value.eng && ticket.value.part) {
+    newTicket.value.cod_eng = ticket.value.eng.id_code;
+    newTicket.value.cod_part = ticket.value.part.id_code;
+    staffStore.resetTicket();
+  }
+});
 
 const rules = {
   cod_eng: {

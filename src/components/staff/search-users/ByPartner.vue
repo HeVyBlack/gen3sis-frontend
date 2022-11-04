@@ -234,6 +234,21 @@
               </ul>
             </div>
           </div>
+          <template v-if="item.user_checked">
+            <button
+              type="submit"
+              class="btn btn-dark mb-3"
+              @:click="
+                item.type == 'engineer'
+                  ? staffStore.setEng(item)
+                  : item.type == 'partner'
+                  ? staffStore.setPart(item)
+                  : null
+              "
+            >
+              Crear ticket
+            </button>
+          </template>
         </div>
       </div>
     </template>
@@ -268,8 +283,10 @@ import { ref } from "vue";
 import axios from "axios";
 import { useAlertStore } from "../../../stores/ui/alert";
 import { useModalStore } from "../../../stores/ui/modal";
+import { useStaffStore } from "../../../stores/staff";
 
 // State
+const staffStore = useStaffStore();
 const modalStore = useModalStore();
 const alertStore = useAlertStore();
 const users = ref(null);

@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div class="row p-3 m-2">
+      <div class="col">
+        <CreateTicket />
+      </div>
+    </div>
+
     <div class="row">
       <div class="col"><ByEmail /></div>
     </div>
@@ -14,6 +20,11 @@
 import ByPartner from "./search-users/ByPartner.vue";
 import ByEngineer from "./search-users/ByEngineer.vue";
 import ByEmail from "./search-users/ByEmail.vue";
+import CreateTicket from "./search-users/CreateTicket.vue";
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.list__item + .list__item {
+  margin-top: 20px;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div class="row">
-      <div class="col-2 p-3">
+      <div class="col-sm-12 col-md-2 p-3">
         <div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -19,7 +19,7 @@
           </ul>
         </div>
       </div>
-      <div class="col">
+      <div class="col-sm-12 col-md p-2 m-2">
         <div><router-view /></div>
       </div>
     </div>
