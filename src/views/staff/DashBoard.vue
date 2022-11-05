@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center">
+  <div class="text-center container-fluid">
     <div class="row">
-      <div class="col-sm-12 col-md-2 p-3">
+      <div class="col-sm-12 col-md-1 p-3">
         <div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">

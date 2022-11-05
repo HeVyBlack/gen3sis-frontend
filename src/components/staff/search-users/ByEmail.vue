@@ -54,18 +54,37 @@
             <br />
             <ul class="list-group">
               <ul class="list-group">
-                <li class="list-group-item">Email: {{ user.email }}</li>
-                <li class="list-group-item">Tipo: {{ user.type }}</li>
                 <li class="list-group-item">
-                  Verificó su email: {{ user.verified_email }}
+                  Email: <strong>{{ user.email }}</strong>
                 </li>
                 <li class="list-group-item">
-                  Verificó su info: {{ user.verified_info }}
+                  Tipo: <strong>{{ user.type }}</strong>
                 </li>
                 <li class="list-group-item">
-                  Usuario verificado: {{ user.user_checked }}
+                  Verificó su email:
+                  <strong>{{
+                    user.verified_email
+                      ? "Verificó su email"
+                      : "No está verificado"
+                  }}</strong>
                 </li>
-                <li class="list-group-item">Código: {{ user.id_code }}</li>
+                <li class="list-group-item">
+                  Verificó su info:
+                  <strong>{{
+                    user.verified_info
+                      ? "Verificó su info"
+                      : "No verificó su info"
+                  }}</strong>
+                </li>
+                <li class="list-group-item">
+                  Usuario verificado:
+                  <strong>{{
+                    user.user_checked ? "Está verificado" : "No está verificado"
+                  }}</strong>
+                </li>
+                <li class="list-group-item">
+                  Código: <strong>{{ user.id_code }}</strong>
+                </li>
               </ul>
             </ul>
             <template

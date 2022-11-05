@@ -1,71 +1,58 @@
 <template>
-  <div class="container">
-    <div class="container px-5">
-      <div class="row">
-        <div class="row">
-          <div class="col">
-            <h6><strong>Verificó su info</strong></h6>
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              v-model="formData.verified_info"
-            >
+  <div class="border border-danger p-3 container">
+    <h4>Ingenieros</h4>
+    <va-form tag="form" @submit.prevent="getUsers">
+      <div class="row px-3">
+        <div class="col-sm-3 col-lg-3">
+          <div class="my-3">
+            <h6><strong>¿Verificó su info?</strong></h6>
+            <select class="form-select" v-model="formData.verified_info">
               <option :value="null">Selecciona</option>
               <option :value="true">Verdadero</option>
               <option :value="false">Falso</option>
             </select>
           </div>
-          <br />
-          <div class="col">
-            <h6><strong>Verificó su email</strong></h6>
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              v-model="formData.verified_email"
-            >
+          <div class="my-3">
+            <h6><strong>¿Verificó su email?</strong></h6>
+            <select class="form-select" v-model="formData.verified_email">
+              <option :value="null">Selecciona</option>
+              <option :value="true">Verdadero</option>
+              <option :value="false">Falso</option>
+            </select>
+          </div>
+          <div class="my-3">
+            <h6><strong>¿Usuario verificado?</strong></h6>
+            <select class="form-select" v-model="formData.user_checked">
               <option :value="null">Selecciona</option>
               <option :value="true">Verdadero</option>
               <option :value="false">Falso</option>
             </select>
           </div>
         </div>
-        <!--name-->
-        <div class="col">
-          <label for="name" class="form-label"
-            ><strong>Tu nombre</strong></label
-          >
 
-          <input
-            type="text"
-            class="form-control px-5 py-2"
-            id="name"
-            aria-describedby="name_help"
-            v-model="formData.engineer.name"
-          />
-        </div>
-        <br />
-        <!--last_name-->
-        <div class="col">
-          <label for="last_name" class="form-label"
-            ><strong>Tu apellido</strong></label
-          >
-          <input
-            type="text"
-            class="form-control px-5 py-2"
-            id="last_name"
-            aria-describedby="last_name_help"
-            v-model="formData.engineer.last_name"
-          />
-        </div>
-      </div>
-      <br />
-      <div>
-        <div class="row">
-          <!--country-->
-          <div class="col">
-            <label for="country" class="form-label"
-              ><strong>Tu país</strong></label
-            >
+        <div class="col-sm-3 col-lg-3">
+          <div class="my-3">
+            <h6><strong>Nombre</strong></h6>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              aria-describedby="name_help"
+              v-model="formData.engineer.name"
+            />
+          </div>
+          <div class="my-3">
+            <h6><strong>Email</strong></h6>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="email_help"
+              v-model="formData.engineer.email"
+            />
+          </div>
+          <div class="my-3">
+            <h6><strong>País</strong></h6>
             <select
               id="country"
               name="country"
@@ -373,418 +360,321 @@
               <option value="Zimbabwe">Zimbabwe</option>
             </select>
           </div>
-          <br />
-          <!--city-->
-          <div class="col">
-            <label for="city" class="form-label"
-              ><strong>Tu ciudad</strong></label
-            >
+          <div class="my-3">
+            <h6><strong>Nivel</strong></h6>
+            <select class="form-select" v-model="formData.engineer.level">
+              <option :value="null">Selecciona</option>
+              <option value="profesional">Profesional</option>
+              <option value="technical">Técnico</option>
+              <option value="technologist">Tecnológico</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-3 col-lg-3">
+          <div class="my-3">
+            <h6><strong>Apellido</strong></h6>
             <input
               type="text"
-              class="form-control px-5 py-2"
-              id="city"
-              aria-describedby="city_help"
-              v-model="formData.engineer.city"
+              class="form-control"
+              id="last_name"
+              aria-describedby="last_name_help"
+              v-model="formData.engineer.last_name"
             />
           </div>
-        </div>
-      </div>
-      <br />
-      <!--level-->
-      <div>
-        <label for="level" class="form-label"><strong>Tu nivel</strong></label>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="checkLevel"
-            id="profesional"
-            value="profesional"
-            v-model="formData.engineer.level"
-          />
-          <label class="form-check-label" for="profesional">
-            Profesional
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="checkLevel"
-            id="technical"
-            value="technical"
-            v-model="formData.engineer.level"
-          />
-          <label class="form-check-label" for="technical"> Técnico </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="checkLevel"
-            id="technologist"
-            value="technologist"
-            v-model="formData.engineer.level"
-          />
-          <label class="form-check-label" for="technologist">
-            Tecnológico
-          </label>
-        </div>
-      </div>
-      <br />
-      <!--exp_plat-->
-      <div>
-        <label for="level" class="form-label"
-          ><strong
-            >Tienes experiencia en implementación y manejo de plataformas y/o
-            servicios, selecciona cuales</strong
-          ></label
-        >
-
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="platCheck"
-            id="yes"
-            v-bind:value="true"
-            v-model="formData.engineer.exp_plat_check"
-          />
-          <label class="form-check-label" for="yes"> Si </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="platCheck"
-            id="no"
-            v-bind:value="false"
-            v-model="formData.engineer.exp_plat_check"
-          />
-          <label class="form-check-label" for="no"> No </label>
-        </div>
-        <div
-          v-if="
-            formData.engineer.exp_plat_check == 'true' ||
-            formData.engineer.exp_plat_check == true
-          "
-        >
-          <h5>Si tu respuesta anterior fue si, selecciona caul</h5>
-
-          <div class="form-check">
+          <div class="my-3">
+            <h6><strong>Teléfono</strong></h6>
             <input
-              class="form-check-input"
-              type="checkbox"
-              id="implementación"
-              value="1"
-              v-model="formData.engineer.exp_plat.implementation"
+              type="number"
+              class="form-control"
+              id="tel"
+              aria-describedby="tel_help"
+              v-model="formData.engineer.tel"
             />
-            <label class="form-check-label" for="implementación">
-              Implementación
-            </label>
           </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="cyber_security"
-              value="1"
-              v-model="formData.engineer.exp_plat.cyber_security"
-            />
-            <label class="form-check-label" for="cyber_security">
-              Ciber seguridad
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="cloud_services"
-              value="1"
-              v-model="formData.engineer.exp_plat.cloud_services"
-            />
-            <label class="form-check-label" for="cloud_services">
-              Cloud Services
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="infrastructure"
-              value="1"
-              v-model="formData.engineer.exp_plat.infrastructure"
-            />
-            <label class="form-check-label" for="infrastructure">
-              Infraestructura
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="structured_cabling"
-              value="1"
-              v-model="formData.engineer.exp_plat.structured_cabling"
-            />
-            <label class="form-check-label" for="structured_cabling">
-              Cableado Estructurado
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="other"
-              value="1"
-              v-model="formData.engineer.exp_plat.other"
-            />
-            <label class="form-check-label" for="other"> Otro, cuales? </label>
-          </div>
-
-          <div v-if="formData.engineer.exp_plat.other">
-            <h6><strong>Escribe cuales son:</strong></h6>
+          <div class="my-3">
+            <h6><strong>Ciudad</strong></h6>
             <input
               type="text"
               class="form-control"
               id="city"
               aria-describedby="city_help"
-              v-model="exp_plat_value"
+              v-model="formData.engineer.city"
             />
           </div>
-        </div>
-      </div>
-      <br />
-      <div class="row">
-        <label for="time_in_imp" class="form-label col"
-          ><strong
-            >Cuanto tiempo de experiencia tienes en implementación de soluciones
-            de tecnología:</strong
-          ></label
-        >
-
-        <div class="col">
-          <input
-            class="form-control px-5 py-2"
-            type="text"
-            id="time_in_imp"
-            v-model="formData.engineer.time_in_imp"
-            ref="time_in_imp"
-          />
-        </div>
-      </div>
-      <br />
-      <!--certs-->
-      <div>
-        <label class="form-label"
-          ><strong>Tus certificados </strong>(escribe, y luego dale en el botón
-          de enviar)</label
-        >
-        <div class="row">
-          <div class="col p-2 my-3">
-            <label for="input_certs" class="form-label"
-              ><strong>Escribe tus certificaciones:</strong></label
-            >
-          </div>
-          <div class="col">
+          <div class="my-3">
+            <h6><strong>Certificados</strong></h6>
             <input
-              class="form-control px-5 py-2 my-3"
+              class="form-control"
               type="text"
-              id="input_certs"
-              v-model="cert_value"
-              ref="input_certs"
+              id="certs"
+              v-model="formData.engineer.certs"
+              ref="certs"
             />
           </div>
         </div>
-      </div>
-      <br />
-      <div class="row">
-        <!--exp_in_pro_dir-->
-        <div class="col">
-          <label for="exp_in_pro_dir" class="form-label"
-            ><strong
-              >¿Tienes experiencia en dirección de proyectos?</strong
-            ></label
-          >
-          <div class="form-check">
+        <div class="col-sm-3 col-lg-3">
+          <div class="my-3">
+            <h6><strong>Tiempo en imp. de sol.</strong></h6>
             <input
-              class="form-check-input"
-              type="radio"
-              name="exp_in_pro_dir_check"
-              id="exp_in_pro_dir_check"
-              v-bind:value="true"
+              class="form-control"
+              type="number"
+              id="time_in_imp"
+              v-model="formData.engineer.time_in_imp"
+              ref="time_in_imp"
+            />
+          </div>
+          <div class="my-3">
+            <h6><strong>Exp. en ejec. de pro.</strong></h6>
+            <select class="form-select" v-model="formData.engineer.exp_in_exec">
+              <option :value="null">Selecciona</option>
+              <option :value="true">Verdadero</option>
+              <option :value="false">Falso</option>
+            </select>
+          </div>
+          <div class="my-3">
+            <h6><strong>Exp. en dir. de pro.</strong></h6>
+            <select
+              class="form-select"
               v-model="formData.engineer.exp_in_pro_dir"
-            />
-            <label class="form-check-label" for="exp_in_pro_dir_check">
-              Si
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="exp_in_pro_dir_check"
-              id="exp_in_pro_dir_check1"
-              v-bind:value="false"
-              v-model="formData.engineer.exp_in_pro_dir"
-            />
-            <label class="form-check-label" for="exp_in_pro_dir_check1">
-              No
-            </label>
-          </div>
-        </div>
-        <br />
-        <!--exp_in_exec-->
-        <div class="col">
-          <label for="exp_in_exec" class="form-label"
-            ><strong
-              >¿Tienes experiencia en ejecución de proyectos?</strong
-            ></label
-          >
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="exp_in_exec_check"
-              id="exp_in_exec_check"
-              v-bind:value="true"
-              v-model="formData.engineer.exp_in_exec"
-            />
-            <label class="form-check-label" for="exp_in_exec_check"> Si </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="exp_in_exec_check"
-              id="exp_in_exec_check1"
-              v-bind:value="false"
-              v-model="formData.engineer.exp_in_exec"
-            />
-            <label class="form-check-label" for="exp_in_exec_check1">
-              No
-            </label>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="row">
-        <!--tel-->
-        <div class="col">
-          <label for="tel" class="form-label"
-            ><strong>Tu teléfono</strong></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="tel"
-            aria-describedby="tel_help"
-            v-model="formData.engineer.tel"
-          />
-        </div>
-        <br />
-        <!--email-->
-        <div class="col">
-          <label for="email" class="form-label"
-            ><strong>Tu email</strong></label
-          >
-
-          <input
-            type="text"
-            class="form-control"
-            id="email"
-            aria-describedby="email_help"
-            v-model="formData.engineer.email"
-          />
-        </div>
-      </div>
-      <br />
-      <button class="btn btn-dark" @click="getUsers">Buscar</button>
-    </div>
-    <template v-if="users">
-      <div v-for="(item, index) in users" :key="index" id="users">
-        <div class="container bg-light border border-danger my-5">
-          <div class="row p-3">
-            <div class="col">
-              <ul class="list-group">
-                <li class="list-group-item">Email: {{ item.email }}</li>
-                <li class="list-group-item">Tipo: {{ item.type }}</li>
-                <li class="list-group-item">
-                  Verificó su email: {{ item.verified_email }}
-                </li>
-                <li class="list-group-item">
-                  Verificó su info: {{ item.verified_info }}
-                </li>
-                <li class="list-group-item">
-                  Usuario verificado: {{ item.user_checked }}
-                </li>
-                <li class="list-group-item">Código: {{ item.id_code }}</li>
-              </ul>
-            </div>
-            <div class="col" v-if="item.verified_info">
-              <h5>Información</h5>
-              <ul class="list-group">
-                <li class="list-group-item">Nombre: {{ item.info.name }}</li>
-                <li class="list-group-item">
-                  Apellido: {{ item.info.last_name }}
-                </li>
-                <li class="list-group-item">País: {{ item.info.country }}</li>
-                <li class="list-group-item">Ciudad: {{ item.info.city }}</li>
-                <li class="list-group-item">Nivel: {{ item.info.level }}</li>
-                <li class="list-group-item">
-                  Experiencia en direción de proyectos:
-                  {{ item.info.exp_in_pro_dir }}
-                </li>
-                <li class="list-group-item">
-                  Experiencia en ejecución: {{ item.info.exp_in_exec }}
-                </li>
-                <li class="list-group-item">Teléfono: {{ item.info.tel }}</li>
-                <li class="list-group-item">Email: {{ item.info.email }}</li>
-              </ul>
-            </div>
-          </div>
-          <template v-if="item.user_checked">
-            <button
-              type="submit"
-              class="btn btn-dark mb-3"
-              @:click="
-                item.type == 'engineer'
-                  ? staffStore.setEng(item)
-                  : item.type == 'partner'
-                  ? staffStore.setPart(item)
-                  : null
-              "
             >
-              Crear ticket
-            </button>
+              <option :value="null">Selecciona</option>
+              <option :value="true">Verdadero</option>
+              <option :value="false">Falso</option>
+            </select>
+          </div>
+          <div class="my-3">
+            <h6>
+              <strong>Exp en imp. y man. de plat.</strong>
+            </h6>
+            <select
+              class="form-select"
+              v-model="formData.engineer.exp_plat_check"
+            >
+              <option :value="null">Selecciona</option>
+              <option :value="true">Tiene</option>
+              <option :value="false">No tiene</option>
+            </select>
+          </div>
+          <template v-if="formData.engineer.exp_plat_check"
+            ><div class="my-3">
+              <h6>
+                <strong>Selecciona cual</strong>
+              </h6>
+              <div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="implementación"
+                    value="1"
+                    v-model="formData.engineer.exp_plat.implementation"
+                  />
+                  <label class="form-check-label" for="implementación">
+                    Implementación
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="cyber_security"
+                    value="1"
+                    v-model="formData.engineer.exp_plat.cyber_security"
+                  />
+                  <label class="form-check-label" for="cyber_security">
+                    Ciber seguridad
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="cloud_services"
+                    value="1"
+                    v-model="formData.engineer.exp_plat.cloud_services"
+                  />
+                  <label class="form-check-label" for="cloud_services">
+                    Cloud Services
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="infrastructure"
+                    value="1"
+                    v-model="formData.engineer.exp_plat.infrastructure"
+                  />
+                  <label class="form-check-label" for="infrastructure">
+                    Infraestructura
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="structured_cabling"
+                    value="1"
+                    v-model="formData.engineer.exp_plat.structured_cabling"
+                  />
+                  <label class="form-check-label" for="structured_cabling">
+                    Cableado Estructurado
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="other"
+                    value="1"
+                    v-model="formData.engineer.exp_plat.other"
+                  />
+                  <label class="form-check-label" for="other">
+                    Otro, cuales?
+                  </label>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template
+            v-if="
+              formData.engineer.exp_plat.other &&
+              formData.engineer.exp_plat_check
+            "
+            ><div class="my-3">
+              <h6><strong>Escribe cuales son:</strong></h6>
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                aria-describedby="city_help"
+                v-model="exp_plat_value"
+              />
+            </div>
           </template>
         </div>
       </div>
-    </template>
-    <template v-if="Object.keys(paginateOptions).length > 0">
-      <nav aria-label="Page navigation example">
+      <button type="submit" class="btn m-1 bg-dark border-0 text-light">
+        Buscar
+      </button>
+      <template v-if="users">
+        <button
+          class="btn m-1 bg-dark border-0 text-light"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+        >
+          Ver usuarios
+        </button>
+      </template>
+    </va-form>
+  </div>
+  <template v-if="users"
+    ><div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    >
+      <template v-if="Object.keys(paginateOptions).length > 0"> </template>
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Ingenieros</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <nav aria-label="navigation" class="m-auto mt-3">
         <ul class="pagination">
           <li
             class="page-item"
             @click="changePage(paginateOptions.prevPage)"
             v-if="paginateOptions.hasPrevPage"
           >
-            <a class="page-link">Previous</a>
+            <a class="page-link text-dark"
+              ><va-icon name="chevron_left" size="small" /> Previo
+            </a>
           </li>
           <li class="page-item" v-if="paginateOptions.page">
-            <a class="page-link">{{ paginateOptions.page }}</a>
+            <a class="page-link text-dark">{{ paginateOptions.page }}</a>
           </li>
           <li
             class="page-item"
             @click="changePage(paginateOptions.nextPage)"
             v-if="paginateOptions.hasNextPage"
           >
-            <a class="page-link">Next</a>
+            <a class="page-link text-dark"
+              >Siguiente <va-icon name="chevron_right" size="small"
+            /></a>
           </li>
         </ul>
       </nav>
-    </template>
-  </div>
+      <div class="offcanvas-body">
+        <div v-for="(item, index) in users" :key="index" id="users">
+          <div class="container bg-light border border-danger mb-3">
+            <div class="row p-3">
+              <div class="col">
+                <h5>Cuenta</h5>
+                <ul class="list-group">
+                  <li class="list-group-item">Email: {{ item.email }}</li>
+                  <li class="list-group-item">Tipo: {{ item.type }}</li>
+                  <li class="list-group-item">
+                    Verificó su email: {{ item.verified_email }}
+                  </li>
+                  <li class="list-group-item">
+                    Verificó su info: {{ item.verified_info }}
+                  </li>
+                  <li class="list-group-item">
+                    Usuario verificado: {{ item.user_checked }}
+                  </li>
+                  <li class="list-group-item">Código: {{ item.id_code }}</li>
+                </ul>
+              </div>
+              <div class="col my-3" v-if="item.verified_info">
+                <h5>Información</h5>
+                <ul class="list-group">
+                  <li class="list-group-item">Nombre: {{ item.info.name }}</li>
+                  <li class="list-group-item">
+                    Apellido: {{ item.info.last_name }}
+                  </li>
+                  <li class="list-group-item">País: {{ item.info.country }}</li>
+                  <li class="list-group-item">Ciudad: {{ item.info.city }}</li>
+                  <li class="list-group-item">Nivel: {{ item.info.level }}</li>
+                  <li class="list-group-item">
+                    Experiencia en direción de proyectos:
+                    {{ item.info.exp_in_pro_dir }}
+                  </li>
+                  <li class="list-group-item">
+                    Experiencia en ejecución: {{ item.info.exp_in_exec }}
+                  </li>
+                  <li class="list-group-item">Teléfono: {{ item.info.tel }}</li>
+                  <li class="list-group-item">Email: {{ item.info.email }}</li>
+                </ul>
+              </div>
+            </div>
+            <template v-if="item.user_checked">
+              <button
+                type="submit"
+                class="btn btn-dark mb-3"
+                @:click="
+                  item.type == 'engineer'
+                    ? staffStore.setEng(item)
+                    : item.type == 'partner'
+                    ? staffStore.setPart(item)
+                    : null
+                "
+              >
+                Crear ticket
+              </button>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
 </template>
 <script setup>
 import { ref } from "vue";
@@ -803,6 +693,7 @@ const paginateOptions = ref({});
 const formData = ref({
   verified_email: null,
   verified_info: null,
+  user_checked: null,
   engineer: {
     name: null,
     last_name: null,
@@ -829,11 +720,11 @@ const formData = ref({
 
 const exp_plat_value = ref(null);
 
-const cert_value = ref(null);
-
 let url = "/staff/get-users?type=engineer&";
 
 const getUsers = async () => {
+  // Set off canvas
+  modalStore.setType("wait_offcanvas");
   url = "/staff/get-users?type=engineer&";
   if (formData.value.verified_email != null) {
     url = url + `verified_email=${formData.value.verified_email}&`;

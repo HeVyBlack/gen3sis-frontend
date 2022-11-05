@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row p-3 m-2">
+    <div class="row">
       <div class="col">
         <CreateTicket />
       </div>
@@ -10,8 +10,10 @@
       <div class="col"><ByEmail /></div>
     </div>
     <div class="row">
-      <div class="col-md-12 col-lg-6"><ByPartner /></div>
-      <div class="col-md-12 col-lg-6"><ByEngineer /></div>
+      <div class="col p-3"><ByPartner /></div>
+    </div>
+    <div class="row">
+      <div class="col p-3"><ByEngineer /></div>
     </div>
   </div>
 </template>

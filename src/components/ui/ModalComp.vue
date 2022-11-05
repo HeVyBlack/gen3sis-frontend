@@ -25,7 +25,7 @@ const { type } = storeToRefs(modalStore);
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100vh;
-  z-index: 1031;
+  z-index: 1046;
   top: 0;
   left: 0;
   display: flex;
