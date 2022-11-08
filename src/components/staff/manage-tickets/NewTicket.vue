@@ -120,12 +120,12 @@
     >
       {{ error.$message }}*
     </div>
-    <input
-      type="textarea"
-      class="form-control"
+    <textarea
       id="desc"
+      class="form-control"
       placeholder="Ingresa la descripción"
       v-model="newTicket.desc"
+      maxlength="450"
     />
   </div>
 
@@ -255,7 +255,7 @@ const rules = {
   desc: {
     maxLength: helpers.withMessage(
       "La descripción debe ser menor a 80 carácteres es requerida",
-      maxLength(80)
+      maxLength(450)
     ),
   },
 };

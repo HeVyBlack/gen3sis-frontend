@@ -574,15 +574,15 @@
     <div class="row">
       <label for="input_certs" class="form-label col"
         ><strong
-          >Cuanto tiempo de experiencia tienes en implementación de soluciones
-          de tecnología:</strong
+          >Cuanto tiempo (en años) de experiencia tienes en implementación de
+          soluciones de tecnología:</strong
         ></label
       >
 
       <div class="col">
         <input
           class="form-control px-5 py-2"
-          type="text"
+          type="number"
           id="input_certs"
           v-model="formData.time_in_imp"
           ref="input_certs"
@@ -840,8 +840,8 @@ const rules = {
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "El nombre debe de ser menor a 14 carácteres",
-      maxLength(14)
+      "El nombre debe de ser menor a 15 carácteres",
+      maxLength(15)
     ),
   },
   last_name: {
@@ -851,8 +851,8 @@ const rules = {
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "El apellido debe de ser menor a 14 carácteres",
-      maxLength(14)
+      "El apellido debe de ser menor a 15 carácteres",
+      maxLength(15)
     ),
   },
   city: {
@@ -862,8 +862,8 @@ const rules = {
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "La ciudad debe de ser menor a 14 carácteres",
-      maxLength(14)
+      "La ciudad debe de ser menor a 80 carácteres",
+      maxLength(80)
     ),
   },
   country: {
@@ -873,19 +873,19 @@ const rules = {
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "La ciudad debe de ser menor a 14 carácteres",
-      maxLength(14)
+      "La ciudad debe de ser menor a 40 carácteres",
+      maxLength(40)
     ),
   },
   tel: {
     required: helpers.withMessage("El teléfono es requerido", required),
     minLength: helpers.withMessage(
-      "El teléfono debe contener al menos 8 carácteres",
-      minLength(8)
+      "El teléfono debe contener al menos 10 carácteres",
+      minLength(10)
     ),
     maxLength: helpers.withMessage(
-      "El teléfono debe de ser menor a 14 carácteres",
-      maxLength(14)
+      "El teléfono debe de ser menor a 12 carácteres",
+      maxLength(12)
     ),
   },
   level: {
@@ -901,7 +901,7 @@ const rules = {
     requiredIfTrue: helpers.withMessage(
       "La plataformas es requerida",
       requiredIf(() => {
-        return formData.value.exp_plat_check == "true";
+        return formData.value.exp_plat_check;
       })
     ),
   },
@@ -909,8 +909,8 @@ const rules = {
   time_in_imp: {
     required: helpers.withMessage("El tiempo es necesario", required),
     maxLength: helpers.withMessage(
-      "El tiempo debe ser menor a 30 dígitos",
-      maxLength(30)
+      "Los años deben ser menor a 80",
+      maxLength(80)
     ),
   },
   certs: {

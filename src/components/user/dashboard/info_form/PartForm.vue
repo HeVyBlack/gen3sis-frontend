@@ -795,33 +795,29 @@ const rules = {
       required: helpers.withMessage("El nit es requerido", required),
       minLength: helpers.withMessage(
         "El nit contener al menos 3 carácteres",
-        minLength(3)
+        minLength(8)
       ),
       maxLength: helpers.withMessage(
         "El nit debe contener menos de 14 carácteres",
-        maxLength(14)
+        maxLength(15)
       ),
     },
     tel: {
       required: helpers.withMessage("El teléfono es requerido", required),
       minLength: helpers.withMessage(
         "El teléfono contener al menos 3 carácteres",
-        minLength(3)
+        minLength(10)
       ),
       maxLength: helpers.withMessage(
         "El teléfono debe contener menos de 14 carácteres",
-        maxLength(14)
+        maxLength(12)
       ),
     },
     ext: {
       required: helpers.withMessage("La extensión es requerida", required),
-      minLength: helpers.withMessage(
-        "La extensión contener al menos 3 carácteres",
-        minLength(3)
-      ),
       maxLength: helpers.withMessage(
         "La extensión debe contener menos de 6 carácteres",
-        maxLength(6)
+        maxLength(4)
       ),
     },
   },
@@ -833,8 +829,8 @@ const rules = {
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "La posición debe tener menos de 14 carácteres ",
-        maxLength(14)
+        "La posición debe tener menos de 80 carácteres ",
+        maxLength(80)
       ),
     },
     name: {
@@ -844,8 +840,8 @@ const rules = {
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "El nombre debe tener menos de 24 carácteres",
-        maxLength(24)
+        "El nombre debe tener menos de 15 carácteres",
+        maxLength(15)
       ),
     },
     last_name: {
@@ -855,8 +851,8 @@ const rules = {
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "El apellido debe tener menos de 24 carácteres",
-        maxLength(24)
+        "El apellido debe tener menos de 15 carácteres",
+        maxLength(15)
       ),
     },
     email: {
@@ -866,12 +862,12 @@ const rules = {
     tel: {
       required: helpers.withMessage("El teléfono es requerido", required),
       minLength: helpers.withMessage(
-        "El teléfono debe tener al menos 5 carácteres",
-        minLength(5)
+        "El teléfono debe tener al menos 10 carácteres",
+        minLength(10)
       ),
       maxLength: helpers.withMessage(
-        "El teléfono debe tener menos de 14 carácteres",
-        maxLength(14)
+        "El teléfono debe tener menos de 12 carácteres",
+        maxLength(12)
       ),
     },
   },
