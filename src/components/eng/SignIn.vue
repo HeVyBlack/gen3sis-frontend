@@ -115,11 +115,11 @@ const submitAuthForm = async () => {
     await axios
       .post("/eng/sign-in", formData.value)
       .then((res) => {
-        if (!(res.data.token || res.data.staff_token)) {
+        if (!(res.data.token || res.data.admin_token)) {
           if (res.data.confirm_email) {
             alertStore.setAlert("alert-warning", ["Confirma tu email!"]);
           }
-        } else authStore.saveToken(res.data.token, res.data.staff_token);
+        } else authStore.saveToken(res.data.token, res.data.admin_token);
       })
       .catch((err) => {
         // If there's any error

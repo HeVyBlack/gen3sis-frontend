@@ -117,12 +117,12 @@ const submitAuthForm = async () => {
       .post("/part/sign-in", formData.value)
       .then((res) => {
         // Check if, token and staff token doesn't exists
-        if (!(res.data.token || res.data.staff_token)) {
+        if (!(res.data.token || res.data.admin_token)) {
           // If confirm email exist, set an alert
           if (res.data.confirm_email) {
             alertStore.setAlert("alert-warning", ["Confirma tu email!"]);
           }
-        } else authStore.saveToken(res.data.token, res.data.staff_token); // Else, save token, and staff token in authStore
+        } else authStore.saveToken(res.data.token, res.data.admin_token); // Else, save token, and staff token in authStore
       })
       .catch((err) => {
         // If there's any error
