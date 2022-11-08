@@ -759,18 +759,18 @@ const authstore = useAuthStore();
 
 const formData = ref({
   account: {
-    r_social: "",
-    nit: "",
-    tel: "",
-    ext: "",
-    web_page: "",
+    r_social: null,
+    nit: null,
+    tel: null,
+    ext: null,
+    web_page: null,
   },
   cont: {
-    pos: "",
-    name: "",
-    last_name: "",
-    email: "",
-    tel: "",
+    pos: null,
+    name: null,
+    last_name: null,
+    email: null,
+    tel: null,
   },
 });
 
@@ -794,11 +794,11 @@ const rules = {
     nit: {
       required: helpers.withMessage("El nit es requerido", required),
       minLength: helpers.withMessage(
-        "El nit contener al menos 3 carácteres",
+        "El nit contener al menos 8 carácteres",
         minLength(8)
       ),
       maxLength: helpers.withMessage(
-        "El nit debe contener menos de 14 carácteres",
+        "El nit debe contener menos de 15 carácteres",
         maxLength(15)
       ),
     },
@@ -876,25 +876,48 @@ const rules = {
 // v$ required for vuelidate
 const v$ = useVuelidate(rules, formData);
 
+const sample_form = {
+  account: {
+    r_social: null,
+    nit: null,
+    tel: null,
+    ext: null,
+    web_page: null,
+  },
+  cont: {
+    pos: null,
+    name: null,
+    last_name: null,
+    email: null,
+    tel: null,
+  },
+};
+
 const submitForm = async () => {
   // Set modal
   modalStore.setType("wait_offcanvas");
+  for (const i in formData.value.account) {
+    sample_form.account[i] = formData.value.account[i];
+  }
+  for (const i in formData.value.cont) {
+    sample_form.cont[i] = formData.value.cont[i];
+  }
   // Check all information
   const result = await v$.value.$validate();
+  if (
+    countryCode.value &&
+    countryCode.value != "0" &&
+    sample_form.account.tel
+  ) {
+    sample_form.account.tel = countryCode.value + sample_form.account.tel;
+    countryCodeError.value = null;
+  } else {
+    countryCodeError.value = "El codigo de país de necesario";
+    modalStore.resetModal();
+    return;
+  }
+
   if (result) {
-    if (
-      countryCode.value &&
-      countryCode.value != "0" &&
-      formData.value.account.tel
-    ) {
-      formData.value.account.tel =
-        countryCode.value + formData.value.account.tel;
-      countryCodeError.value = null;
-    } else {
-      countryCodeError.value = "El codigo de país de necesario";
-      modalStore.resetModal();
-      return;
-    }
     // If everithing is ok, call postForm
     await postForm();
     // Reset modal
@@ -906,7 +929,7 @@ const submitForm = async () => {
 
 const postForm = async () => {
   await axios
-    .post("part/post-infoform", formData.value)
+    .post("part/post-infoform", sample_form)
     .then(async (res) => {
       // Set an alert, with res.data
       alertSotre.setAlert("alert-success", res.data);
