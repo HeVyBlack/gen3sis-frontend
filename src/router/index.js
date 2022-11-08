@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 // Stores
 import { storeToRefs } from "pinia";
@@ -40,7 +40,7 @@ import StaffSearchUsers from "../components/staff/SearchUsers.vue";
 import ManageTickets from "../components/staff/ManageTickets.vue";
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/staff",
