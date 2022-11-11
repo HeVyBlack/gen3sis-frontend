@@ -37,7 +37,7 @@
             {{ error.$message }}
           </div>
           <input
-            type="text"
+            type="number"
             class="form-control"
             id="nit"
             aria-describedby="nit_help"
@@ -577,7 +577,7 @@
             {{ error.$message }}
           </div>
           <input
-            type="text"
+            type="number"
             class="form-control"
             id="ext"
             aria-describedby="ext_help"
@@ -805,7 +805,7 @@ const rules = {
     tel: {
       required: helpers.withMessage("El teléfono es requerido", required),
       minLength: helpers.withMessage(
-        "El teléfono contener al menos 3 carácteres",
+        "El teléfono contener al menos 10 carácteres",
         minLength(10)
       ),
       maxLength: helpers.withMessage(
@@ -817,7 +817,7 @@ const rules = {
       required: helpers.withMessage("La extensión es requerida", required),
       maxLength: helpers.withMessage(
         "La extensión debe contener menos de 6 carácteres",
-        maxLength(4)
+        maxLength(6)
       ),
     },
   },
@@ -942,7 +942,10 @@ const postForm = async () => {
       // If there's an error_msg, set an alert
       if (err.response.data.error_msg) {
         alertSotre.setAlert("alert-danger", err.response.data);
-      } else alertSotre.setAlert("alert-danger", ["Hubo un error"]); // Else, set an alert
+      } else {
+        console.error(err);
+        alertSotre.setAlert("alert-danger", ["Hubo un error"]); // Else, set an alert
+      }
     });
 };
 </script>

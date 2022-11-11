@@ -1,5 +1,4 @@
 <template>
-  {{ formData }}
   <div class="container px-5">
     <div class="row">
       <!--name-->
@@ -576,6 +575,7 @@
             class="form-control"
             id="exp_plat_value"
             aria-describedby="exp_plat_value_help"
+            maxlength="80"
             v-model="exp_plat_value"
           />
         </div>
