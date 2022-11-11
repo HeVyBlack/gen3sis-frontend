@@ -124,17 +124,17 @@ onMounted(() => {
           tickets.value = res.data.docs;
         } else navOptions.value[i] = res.data[i];
       }
+      modalStore.resetModal();
     })
     .catch((err) => {
-      modalStore.resetModal();
       showModal.value = !showModal.value;
       // If there's any error
       if (err.response.data) {
         // If there's an error_msg, set it as an alert
         alertStore.setAlert("alert-danger", err.response.data);
       } else alertStore.setAlert("alert-danger", ["Hubo un error"]); // Else, just put an alert saying, there's an error
+      modalStore.resetModal();
     });
-  modalStore.resetModal();
 });
 
 const showModal = ref(false);

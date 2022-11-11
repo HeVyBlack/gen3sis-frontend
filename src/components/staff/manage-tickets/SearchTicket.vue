@@ -389,15 +389,14 @@ let url = "/staff/get-tickets?";
 
 const submitTicket = async () => {
   alertStore.resetAlert();
-  modalStore.setType("wait_offcanvas");
   const result = await v$.value.$validate();
   if (result) {
     await getTicket();
   }
-  modalStore.resetModal();
 };
 
 const getTicket = async () => {
+  modalStore.setType("wait_offcanvas");
   url = "/staff/get-tickets?";
   for (const i in ticketToSearch.value) {
     if (
@@ -415,6 +414,7 @@ const getTicket = async () => {
           tickets.value = res.data.docs;
         } else navOptions.value[i] = res.data[i];
       }
+      modalStore.resetModal();
     })
     .catch((err) => {
       modalStore.resetModal();
@@ -438,17 +438,16 @@ const changePage = async (page) => {
           tickets.value = res.data.docs;
         } else navOptions.value[i] = res.data[i];
       }
+      modalStore.resetModal();
     })
     .catch((err) => {
-      modalStore.resetModal();
       // If there's any error
       if (err.response.data) {
         // If there's an error_msg, set it as an alert
         alertStore.setAlert("alert-danger", err.response.data);
       } else alertStore.setAlert("alert-danger", ["Hubo un error"]); // Else, just put an alert saying, there's an error
+      modalStore.resetModal();
     });
-  // Reset modal
-  modalStore.resetModal();
 };
 
 const showModal = ref(false);

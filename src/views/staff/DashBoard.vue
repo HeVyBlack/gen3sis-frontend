@@ -4,18 +4,16 @@
       <div class="col-sm-12 col-md-1 p-3">
         <div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <router-link :to="{ name: 'staff-search-users' }"
-                >Buscar usuarios
-                <font-awesome-icon icon="fa-solid fa-chevron-right"
-              /></router-link>
-            </li>
-            <li class="list-group-item">
-              <router-link :to="{ name: 'staff-manage-tickets' }"
-                >Gestionar tickets
-                <font-awesome-icon icon="fa-solid fa-chevron-right"
-              /></router-link>
-            </li>
+            <router-link :to="{ name: 'staff-search-users' }">
+              <li class="list-group-item">
+                Buscar usuarios
+                <font-awesome-icon icon="fa-solid fa-chevron-right" /></li
+            ></router-link>
+            <router-link :to="{ name: 'staff-manage-tickets' }">
+              <li class="list-group-item">
+                Gestionar tickets
+                <font-awesome-icon icon="fa-solid fa-chevron-right" /></li
+            ></router-link>
           </ul>
         </div>
       </div>
@@ -33,7 +31,7 @@
   font-family: "Signika Negative", sans-serif;
 }
 
-li a {
+ul a {
   color: black;
   text-decoration: none;
 }

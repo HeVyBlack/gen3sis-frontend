@@ -779,7 +779,52 @@
       </div>
     </div>
     <br />
-    <button class="btn btn-dark" @click="submitForm">Enviar</button>
+    <va-collapse
+      v-model="value[0]"
+      header="Por favor, lee lo siguiente"
+      solid
+      color="#212121"
+      color-all
+      text-color="backgroundPrimary"
+      icon="info"
+      class="mb-4"
+    >
+      <div class="container p-3">
+        <p>
+          Bajo la gravedad de juramento declaro que este informe ha sido
+          examinado por mí y que todos los datos son exactos. Consiento y
+          autorizo de manera previa, expresa e inequívoca que mis datos
+          personales sean tratados conforme a lo previsto en la Ley 1581 de
+          2012, Protección de Datos Personales, según lo anuncia el presente
+          documento; y que conozco (he leído) el aviso de privacidad, incluido
+          al final de este formato.
+          <a
+            href="https://gen3sis.net/politicas-g3"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Link</a
+          >
+        </p>
+        <div class="container text-center">
+          <div class="row align-items-center">
+            <div class="col">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="needCheckThis"
+                v-model="checkbox"
+              />
+              <label class="form-check-label mx-2" for="needCheckThis">
+                Acepto
+              </label>
+            </div>
+          </div>
+        </div>
+        <template v-if="checkbox">
+          <button class="btn btn-dark mt-3" @click="submitForm">Enviar</button>
+        </template>
+      </div>
+    </va-collapse>
   </div>
 </template>
 
@@ -812,6 +857,10 @@ import router from "../../../../router";
 const modalStore = useModalStore();
 const alertSotre = useAlertStore();
 const authstore = useAuthStore();
+
+const checkbox = ref(null);
+
+const value = ref([false]);
 
 const formData = ref({
   name: null,
