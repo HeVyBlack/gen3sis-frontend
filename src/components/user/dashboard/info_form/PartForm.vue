@@ -725,7 +725,7 @@
       <br />
       <va-collapse
         v-model="value[0]"
-        header="Por favor, lee lo siguiente"
+        header="Por favor, leé lo siguiente"
         solid
         color="#212121"
         color-all

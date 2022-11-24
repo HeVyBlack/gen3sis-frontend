@@ -4,7 +4,7 @@
     <ModalComp />
     <NavBar :key="navBarKey" />
     <router-view />
-    <FooterComp v-if="user" />
+    <FooterComp class="mt-3" />
   </div>
 </template>
 
@@ -16,14 +16,10 @@ import FooterComp from "./components/ui/FooterComp.vue";
 
 // Stores
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "./stores/auth";
 import { useUiStore } from "./stores/ui/uistore";
 
 const uiStore = useUiStore();
-const authStore = useAuthStore();
 
-// Ref user
-const { user } = storeToRefs(authStore);
 // Ref navBarKey
 const { navBarKey } = storeToRefs(uiStore);
 </script>
@@ -33,6 +29,11 @@ const { navBarKey } = storeToRefs(uiStore);
 @import url("https://fonts.googleapis.com/css2?family=Dosis&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
+
+html {
+  height: 100%;
+}
+
 * {
   font-family: "Asap", sans-serif;
 }

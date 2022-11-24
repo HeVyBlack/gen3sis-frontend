@@ -2,6 +2,7 @@
   <div>
     <va-collapse
       v-model="showCollapse"
+      color="#212121"
       :header="
         ticket.part && ticket.eng
           ? 'Crear ticket (Todo listo)'
@@ -80,7 +81,9 @@
         </template>
       </div>
       <template v-if="ticket.eng && ticket.part">
-        <label @click="setTicket" class="btn btn-dark">Ir a crear ticket</label>
+        <label @click="setTicket" class="btn btn-dark my-3"
+          >Ir a crear ticket</label
+        >
       </template>
     </va-collapse>
   </div>

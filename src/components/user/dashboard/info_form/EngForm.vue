@@ -480,106 +480,108 @@
         />
         <label class="form-check-label" for="no"> No </label>
       </div>
-      <div
+      <template
         v-if="
           formData.exp_plat_check == 'true' || formData.exp_plat_check == true
         "
       >
-        <h5>Si tu respuesta anterior fue si, selecciona caul</h5>
-        <div
-          id="email_help"
-          class="form-text error"
-          v-for="error in v$.exp_plat.$errors"
-          :key="error.$uid"
-        >
-          {{ error.$message }}
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="implementación"
-            value="1"
-            v-model="formData.exp_plat.implementation"
-          />
-          <label class="form-check-label" for="implementación">
-            Implementación
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="cyber_security"
-            value="1"
-            v-model="formData.exp_plat.cyber_security"
-          />
-          <label class="form-check-label" for="cyber_security">
-            Ciber seguridad
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="cloud_services"
-            value="1"
-            v-model="formData.exp_plat.cloud_services"
-          />
-          <label class="form-check-label" for="cloud_services">
-            Cloud Services
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="infrastructure"
-            value="1"
-            v-model="formData.exp_plat.infrastructure"
-          />
-          <label class="form-check-label" for="infrastructure">
-            Infraestructura
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="structured_cabling"
-            value="1"
-            v-model="formData.exp_plat.structured_cabling"
-          />
-          <label class="form-check-label" for="structured_cabling">
-            Cableado Estructurado
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="other"
-            value="1"
-            v-model="formData.exp_plat.other"
-          />
-          <label class="form-check-label" for="other"> Otro, cuales? </label>
-        </div>
-
-        <div v-if="formData.exp_plat.other">
-          <h6><strong>Escribe cuales son:</strong></h6>
-          <div id="email_help" class="form-text error">
-            {{ exp_plat_value_error }}
+        <div>
+          <h5>Si tu respuesta anterior fue si, selecciona caul</h5>
+          <div
+            id="email_help"
+            class="form-text error"
+            v-for="error in v$.exp_plat.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
           </div>
-          <input
-            type="text"
-            class="form-control"
-            id="exp_plat_value"
-            aria-describedby="exp_plat_value_help"
-            maxlength="80"
-            v-model="exp_plat_value"
-          />
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="implementación"
+              value="1"
+              v-model="formData.exp_plat.implementation"
+            />
+            <label class="form-check-label" for="implementación">
+              Implementación
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="cyber_security"
+              value="1"
+              v-model="formData.exp_plat.cyber_security"
+            />
+            <label class="form-check-label" for="cyber_security">
+              Ciber seguridad
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="cloud_services"
+              value="1"
+              v-model="formData.exp_plat.cloud_services"
+            />
+            <label class="form-check-label" for="cloud_services">
+              Cloud Services
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="infrastructure"
+              value="1"
+              v-model="formData.exp_plat.infrastructure"
+            />
+            <label class="form-check-label" for="infrastructure">
+              Infraestructura
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="structured_cabling"
+              value="1"
+              v-model="formData.exp_plat.structured_cabling"
+            />
+            <label class="form-check-label" for="structured_cabling">
+              Cableado Estructurado
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="other"
+              value="1"
+              v-model="formData.exp_plat.other"
+            />
+            <label class="form-check-label" for="other"> Otro, cuales? </label>
+          </div>
+          <template v-if="formData.exp_plat.other">
+            <div>
+              <h6><strong>Escribe cuales son:</strong></h6>
+              <div id="email_help" class="form-text error">
+                {{ exp_plat_value_error }}
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                id="exp_plat_value"
+                aria-describedby="exp_plat_value_help"
+                maxlength="80"
+                v-model="exp_plat_value"
+              /></div
+          ></template>
         </div>
-      </div>
+      </template>
     </div>
     <br />
     <div class="row">
@@ -631,14 +633,21 @@
           >
         </div>
       </div>
-      <div v-if="formData.certs.length > 0">
-        <ul class="certs_list p-3">
-          <li v-for="(cert, index) in formData.certs" :key="index" class="px-2">
-            {{ index }}. {{ cert.cert }}
-          </li>
-        </ul>
-        <label class="btn btn-dark" @click="clearCerts">Limpiar</label>
-      </div>
+      <template v-if="formData.certs.length > 0"
+        ><div>
+          <ul class="certs_list p-3">
+            <li
+              v-for="(cert, index) in formData.certs"
+              :key="index"
+              class="px-2"
+            >
+              {{ index }}. {{ cert.cert }}
+            </li>
+          </ul>
+          <label class="btn btn-dark" @click="clearCerts">Limpiar</label>
+        </div>
+      </template>
+
       <div
         id="certs_help"
         class="form-text error"
@@ -781,7 +790,7 @@
     <br />
     <va-collapse
       v-model="value[0]"
-      header="Por favor, lee lo siguiente"
+      header="Por favor, leé lo siguiente"
       solid
       color="#212121"
       color-all

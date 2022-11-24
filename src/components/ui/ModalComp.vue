@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div class="wait-offcanvas fixed-top" v-if="type == 'wait_offcanvas'">
-      <div class="wait-content">
-        <div class="lds-dual-ring"></div>
+    <template v-if="type == 'wait_offcanvas'"
+      ><div class="wait-offcanvas fixed-top">
+        <div class="wait-content">
+          <div class="lds-dual-ring"></div>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 

@@ -2,27 +2,28 @@
   <div class="container p-5 text-center">
     <div class="row">
       <div class="col">
-        <div
-          class="alert alert-primary"
-          role="alert"
-          v-if="!msg.success_msg && !msg.error_msg"
+        <template v-if="!msg.success_msg && !msg.error_msg"
+          ><div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">Verificando tu correo</h4>
+            <p>Por favor espera...</p>
+          </div>
+        </template>
+        <template v-if="msg.success_msg"
+          ><div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Listo!</h4>
+            <p>
+              {{ msg.success_msg }}
+            </p>
+          </div>
+        </template>
+        <template v-if="msg.error_msg">
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Error!</h4>
+            <p>
+              {{ msg.error_msg }}
+            </p>
+          </div></template
         >
-          <h4 class="alert-heading">Verificando tu correo</h4>
-          <p>Por favor espera...</p>
-        </div>
-        <div class="alert alert-success" role="alert" v-if="msg.success_msg">
-          <h4 class="alert-heading">Listo!</h4>
-          <p>
-            {{ msg.success_msg }}
-          </p>
-        </div>
-
-        <div class="alert alert-danger" role="alert" v-if="msg.error_msg">
-          <h4 class="alert-heading">Error!</h4>
-          <p>
-            {{ msg.error_msg }}
-          </p>
-        </div>
         <router-link :to="{ name: 'index' }" class="btn btn-dark"
           >Ir al inicio</router-link
         >

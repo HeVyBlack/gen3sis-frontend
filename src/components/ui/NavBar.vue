@@ -58,11 +58,13 @@
                       >Dashboard</router-link
                     >
                   </li>
-                  <li v-if="staff_token">
-                    <router-link class="dropdown-item" :to="{ name: 'staff' }"
-                      >Staff Dashboard</router-link
-                    >
-                  </li>
+                  <template v-if="staff_token">
+                    <li>
+                      <router-link class="dropdown-item" :to="{ name: 'staff' }"
+                        >Staff Dashboard</router-link
+                      >
+                    </li></template
+                  >
 
                   <li>
                     <hr class="dropdown-divider" />

@@ -1,7 +1,7 @@
 <template v-if="user">
-  <div class="row">
-    <div class="col">
-      <template v-if="tickets">
+  <template v-if="tickets"
+    ><div class="row">
+      <div class="col">
         <va-list>
           <va-list-label> tickets </va-list-label>
 
@@ -35,29 +35,27 @@
         <template v-if="Object.keys(navOptions).length > 0">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
-              <li
-                class="page-item"
-                @click="changePage(navOptions.prevPage)"
-                v-if="navOptions.hasPrevPage"
+              <template v-if="navOptions.hasPrevPage"
+                ><li class="page-item" @click="changePage(navOptions.prevPage)">
+                  <a class="page-link">Previous</a>
+                </li>
+              </template>
+
+              <template v-if="navOptions.page"
+                ><li class="page-item">
+                  <a class="page-link">{{ navOptions.page }}</a>
+                </li></template
               >
-                <a class="page-link">Previous</a>
-              </li>
-              <li class="page-item" v-if="navOptions.page">
-                <a class="page-link">{{ navOptions.page }}</a>
-              </li>
-              <li
-                class="page-item"
-                @click="changePage(navOptions.nextPage)"
-                v-if="navOptions.hasNextPage"
-              >
-                <a class="page-link">Next</a>
-              </li>
+
+              <template v-if="navOptions.hasNextPage"
+                ><li class="page-item" @click="changePage(navOptions.nextPage)">
+                  <a class="page-link">Next</a>
+                </li>
+              </template>
             </ul>
           </nav>
         </template>
-      </template>
-    </div>
-    <template>
+      </div>
       <va-modal v-model="showModal" no-padding>
         <template #content="{ ok }">
           <va-card-title> información de ticket </va-card-title>
@@ -79,7 +77,8 @@
                   </li>
                   <li class="list-group-item">Horas: {{ ticket.hours }}</li>
                   <li class="list-group-item">
-                    Stado: {{ ticket.state === false ? "Abierto" : "Cerrado" }}
+                    Stado:
+                    {{ ticket.state === false ? "Abierto" : "Cerrado" }}
                   </li>
                   <li class="list-group-item">
                     Descripción: {{ ticket.desc }}
@@ -96,8 +95,8 @@
           </va-card-actions>
         </template>
       </va-modal>
-    </template>
-  </div>
+    </div>
+  </template>
 </template>
 
 <script setup>

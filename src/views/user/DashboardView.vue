@@ -1,5 +1,5 @@
-<template>
-  <div class="container p-5 text-center" v-if="user">
+<template v-if="user">
+  <div class="container p-5 text-center">
     <div class="row">
       <div class="col-sm-12 col-lg-3">
         <ul class="list-group list-group-flush">
