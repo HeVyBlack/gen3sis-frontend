@@ -2,7 +2,7 @@
   <div>
     <template v-if="user">
       <nav
-        class="navbar navbar-expand-lg navbar-light bg-light static-top text-center"
+        class="navbar navbar-expand-lg navbar-dark bg-dark static-top text-center"
       >
         <div class="container">
           <router-link class="navbar-brand" :to="{ name: 'index' }">
@@ -80,7 +80,7 @@
       </nav>
     </template>
     <template v-else>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">
           <router-link class="navbar-brand" :to="{ name: 'index' }">
             <img src="../../assets/isotipo.png" alt="logo" height="36" />
@@ -159,6 +159,6 @@ a:hover {
 
 .link {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 </style>
