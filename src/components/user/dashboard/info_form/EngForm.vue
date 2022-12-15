@@ -447,7 +447,7 @@
       <label for="level" class="form-label"
         ><strong
           >Tienes experiencia en implementación y manejo de plataformas y/o
-          servicios, selecciona cuales</strong
+          servicios, selecciona cuáles</strong
         ></label
       >
       <div
@@ -486,7 +486,7 @@
         "
       >
         <div>
-          <h5>Si tu respuesta anterior fue si, selecciona caul</h5>
+          <h5>Si tu respuesta anterior fue sí, selecciona cual</h5>
           <div
             id="email_help"
             class="form-text error"
@@ -516,7 +516,7 @@
               v-model="formData.exp_plat.cyber_security"
             />
             <label class="form-check-label" for="cyber_security">
-              Ciber seguridad
+              Ciberseguridad
             </label>
           </div>
           <div class="form-check">
@@ -552,7 +552,7 @@
               v-model="formData.exp_plat.structured_cabling"
             />
             <label class="form-check-label" for="structured_cabling">
-              Cableado Estructurado
+              Cableado/Estructurado
             </label>
           </div>
           <div class="form-check">
@@ -563,11 +563,11 @@
               value="1"
               v-model="formData.exp_plat.other"
             />
-            <label class="form-check-label" for="other"> Otro, cuales? </label>
+            <label class="form-check-label" for="other"> Otro, ¿cuáles? </label>
           </div>
           <template v-if="formData.exp_plat.other">
             <div>
-              <h6><strong>Escribe cuales son:</strong></h6>
+              <h6><strong>Escribe cuáles son:</strong></h6>
               <div id="email_help" class="form-text error">
                 {{ exp_plat_value_error }}
               </div>
@@ -606,8 +606,8 @@
     <!--certs-->
     <div>
       <label class="form-label"
-        ><strong>Tus certificados </strong>(escribe, y luego dale en el botón de
-        enviar)</label
+        ><strong>Tus certificados </strong>(escribe, y luego dale click en el
+        botón de enviar)</label
       >
       <div class="row">
         <div class="col p-2 my-3">
@@ -688,7 +688,7 @@
             v-model="formData.exp_in_pro_dir"
           />
           <label class="form-check-label" for="exp_in_pro_dir_check">
-            Si
+            Sí
           </label>
         </div>
         <div class="form-check">
@@ -730,7 +730,7 @@
             :value="true"
             v-model="formData.exp_in_exec"
           />
-          <label class="form-check-label" for="exp_in_exec_check"> Si </label>
+          <label class="form-check-label" for="exp_in_exec_check"> Sí </label>
         </div>
         <div class="form-check">
           <input
