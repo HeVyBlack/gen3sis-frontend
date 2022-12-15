@@ -661,6 +661,34 @@
         {{ cert_value_error }}
       </div>
     </div>
+    <!--exp-->
+    <div class="row">
+      <div
+        id="level_help"
+        class="form-text error"
+        v-for="error in v$.exp.$errors"
+        :key="error.$uid"
+      >
+        {{ error.$message }}
+      </div>
+      <div class="col">
+        <label for="floatingTextarea" class="form-label col"
+          ><strong
+            >Cuéntanos tu sobre tu última experiencia laboral</strong
+          ></label
+        >
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea"
+            maxlength="3000"
+            v-model="formData.exp"
+          ></textarea>
+          <label for="floatingTextarea">Tu experiencia</label>
+        </div>
+      </div>
+    </div>
     <br />
     <div class="row">
       <!--exp_in_pro_dir-->
@@ -888,6 +916,7 @@ const formData = ref({
   },
   time_in_imp: null,
   certs: [],
+  exp: null,
   exp_in_pro_dir: null,
   exp_in_exec: null,
   tel: null,
@@ -960,6 +989,18 @@ const rules = {
   level: {
     required: helpers.withMessage("Tu nivel es requerido", required),
   },
+  exp: {
+    required: helpers.withMessage("Tu nivel es requerido", required),
+    minLength: helpers.withMessage(
+      "Tu experiencia debe tener al menos 20 carácteres",
+      minLength(20)
+    ),
+    maxLength: helpers.withMessage(
+      "Tu experiencia debe tener menos de 3000 carácteres",
+      maxLength(3000)
+    ),
+  },
+
   exp_plat_check: {
     required: helpers.withMessage(
       "La experiencia en plataformas es requerida",
