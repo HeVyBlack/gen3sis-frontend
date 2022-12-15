@@ -865,7 +865,6 @@ const rules = {
       ),
     },
     ext: {
-      required: helpers.withMessage("La extensión es requerida", required),
       maxLength: helpers.withMessage(
         "La extensión debe contener menos de 6 carácteres",
         maxLength(6)

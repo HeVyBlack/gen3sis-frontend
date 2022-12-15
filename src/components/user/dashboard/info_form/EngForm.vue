@@ -1058,8 +1058,7 @@ const submitForm = async () => {
   modalStore.setType("wait_offcanvas");
 
   // Check if everything is alright
-  await v$.value.$validate();
-  const result = true;
+  const result = await v$.value.$validate();
   // If everything is alright
   if (formData.value.exp_plat.other) {
     if (exp_plat_value.value.length < 3 || exp_plat_value.value.length > 80) {
