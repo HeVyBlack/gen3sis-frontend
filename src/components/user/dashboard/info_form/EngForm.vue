@@ -552,7 +552,7 @@
               v-model="formData.exp_plat.structured_cabling"
             />
             <label class="form-check-label" for="structured_cabling">
-              Cableado/Estructurado
+              Cableado Estructurado
             </label>
           </div>
           <div class="form-check">
