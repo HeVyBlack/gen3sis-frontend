@@ -907,12 +907,12 @@ const formData = ref({
   level: null,
   exp_plat_check: null,
   exp_plat: {
-    implementation: null,
-    cyber_security: null,
-    cloud_services: null,
-    infrastructure: null,
-    structured_cabling: null,
-    other: null,
+    implementation: false,
+    cyber_security: false,
+    cloud_services: false,
+    infrastructure: false,
+    structured_cabling: false,
+    other: false,
   },
   time_in_imp: null,
   certs: [],
@@ -990,7 +990,7 @@ const rules = {
     required: helpers.withMessage("Tu nivel es requerido", required),
   },
   exp: {
-    required: helpers.withMessage("Tu nivel es requerido", required),
+    required: helpers.withMessage("Tu experiencia es requerido", required),
     minLength: helpers.withMessage(
       "Tu experiencia debe tener al menos 20 carácteres",
       minLength(20)
@@ -1054,29 +1054,24 @@ const v$ = useVuelidate(rules, formData);
 const cert_value_error = ref(null);
 
 const submitForm = async () => {
-  let formToSubmit = formData.value;
   // Set modal
   modalStore.setType("wait_offcanvas");
 
   // Check if everything is alright
-  const result = await v$.value.$validate();
+  await v$.value.$validate();
+  const result = true;
   // If everything is alright
-  if (formToSubmit.exp_plat.other) {
+  if (formData.value.exp_plat.other) {
     if (exp_plat_value.value.length < 3 || exp_plat_value.value.length > 80) {
       exp_plat_value_error.value =
         "El valor debe estar entre 3 y 80 carácteres";
       modalStore.resetModal();
       return;
     } else {
-      formToSubmit.exp_plat.other = exp_plat_value.value;
+      formData.value.exp_plat.other = exp_plat_value.value;
     }
   }
   if (result) {
-    if (!formToSubmit.exp_plat_check) {
-      formToSubmit.exp_plat_value = null;
-      formToSubmit.exp_plat = null;
-    }
-
     // Call postForm
     await postForm();
     // Reset modal
@@ -1087,7 +1082,14 @@ const submitForm = async () => {
 };
 
 const postForm = async () => {
-  let formToSubmit = formData.value;
+  const formToSubmit = {};
+  for (const i in formData.value) {
+    formToSubmit[i] = formData.value[i];
+  }
+  if (!formToSubmit.exp_plat_check) {
+    formToSubmit.exp_plat = false;
+  }
+
   await axios
     .post("eng/post-infoform", formToSubmit)
     .then(async (res) => {
