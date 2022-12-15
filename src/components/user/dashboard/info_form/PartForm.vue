@@ -566,7 +566,7 @@
         <!--ext-->
         <div class="col">
           <label for="ext" class="form-label"
-            ><strong>Extensión del teléfono</strong></label
+            ><strong>Extensión del teléfono (opcional)</strong></label
           >
           <div
             id="ext_help"
