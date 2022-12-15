@@ -3,7 +3,7 @@
     <div class="container text-center p-5">
       <div class="row">
         <div class="alert alert-success" role="alert">
-          <h4 class="alert-heading">Ya estás de alta!</h4>
+          <h4 class="alert-heading">¡Ya estás de alta!</h4>
           <div>
             <p class="mb-0">Ya estás listo para presentar casos</p>
           </div>
@@ -15,11 +15,11 @@
     <div class="container p-5 text-center">
       <div class="row p-5">
         <div class="alert alert-warning" role="alert">
-          <h4 class="alert-heading">No te hemos dado de alta!</h4>
+          <h4 class="alert-heading">¡No te hemos dado de alta!</h4>
           <template v-if="user.pets && user.pets.length == 0">
             <p>
               <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
-              Pero, tienes un caso urgente? O, quieres conocer nuestros
+              Pero, ¿tienes un caso urgente? o, ¿quieres conocer nuestros
               servicios?
             </p>
             <hr />

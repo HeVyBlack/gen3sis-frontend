@@ -27,7 +27,7 @@
         <br />
         <!--nit-->
         <div class="col">
-          <label for="nit" class="form-label"><strong>Tú NIT</strong></label>
+          <label for="nit" class="form-label"><strong>Tu NIT</strong></label>
           <div
             id="nit_help"
             class="form-text error"
@@ -50,7 +50,7 @@
         <!--tel-->
         <div class="col">
           <label for="tel" class="form-label"
-            ><strong>Tú teléfono</strong></label
+            ><strong>Tu teléfono</strong></label
           >
           <div
             id="tel_help"

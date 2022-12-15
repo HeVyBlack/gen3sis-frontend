@@ -7,7 +7,7 @@
             <h4 class="alert-heading">Ya estás de alta!</h4>
             <div>
               <p class="mb-0">
-                Ya estás de alta! Ahora, hay que esperar a que te lleguen casos
+                ¡Ya estás de alta! Ahora, hay que esperar a que te lleguen casos
                 ;)
                 <router-link
                   :to="{ name: 'get-tickets' }"
@@ -25,10 +25,10 @@
     <div class="container text-center p-5">
       <div class="row">
         <div class="alert alert-warning" role="alert">
-          <h4 class="alert-heading">No te hemos dado de alta!</h4>
+          <h4 class="alert-heading">¡No te hemos dado de alta!</h4>
           <div>
             <p class="mb-0">
-              Ya vlidates tu información, nos pondremos en contacto contigo en
+              Ya validaste tu información, nos pondremos en contacto contigo en
               menos de 48h
             </p>
           </div>
