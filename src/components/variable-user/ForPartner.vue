@@ -30,7 +30,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 ><strong class="link btn btn-dark" @click="makePartRequest"
-                  >crítica</strong
+                  >CRÍTICA</strong
                 ></a
               >
             </p>
