@@ -1,5 +1,4 @@
 <template>
-  {{ users }}
   <div class="border border-danger p-3 container">
     <h4>Ingenieros</h4>
     <va-form tag="form" @submit.prevent="getUsers">
