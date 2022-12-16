@@ -1,4 +1,5 @@
 <template>
+  {{ users }}
   <div class="border border-danger p-3 container">
     <h4>Ingenieros</h4>
     <va-form tag="form" @submit.prevent="getUsers">
@@ -650,6 +651,25 @@
                   <li class="list-group-item">
                     Experiencia en ejecución: {{ item.info.exp_in_exec }}
                   </li>
+                  <li class="list-group-item">
+                    Experiencia:
+                    <va-infinite-scroll>
+                      {{ item.info?.exp }}
+                    </va-infinite-scroll>
+                  </li>
+                  <template v-if="item.info.certs?.length > 0">
+                    <li class="list-group-item">
+                      Certificados:
+                      <va-infinite-scroll>
+                        <div
+                          v-for="(item, index) in item.info.certs"
+                          :key="index"
+                        >
+                          <strong>Cert</strong>: {{ item.cert }}
+                        </div>
+                      </va-infinite-scroll>
+                    </li>
+                  </template>
                   <li class="list-group-item">Teléfono: {{ item.info.tel }}</li>
                   <li class="list-group-item">Email: {{ item.info.email }}</li>
                 </ul>
