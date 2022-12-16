@@ -59,6 +59,7 @@
           </ul>
         </div>
       </div>
+      <p class="fs-6">G3-1.0</p>
     </footer>
   </div>
 </template>
