@@ -3,6 +3,34 @@
     <form v-on:submit.prevent id="form">
       <h4>Información de cuenta</h4>
       <div class="row">
+        <!--Activity-->
+        <div class="col mb-3">
+          <div
+            id="tel_help"
+            class="form-text error"
+            v-for="error in v$.account.activity.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}
+          </div>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="formData.account.activity"
+          >
+            <option :value="null" selected>Selcciona tu actividad</option>
+            <option
+              selected
+              v-for="(item, index) in activity"
+              :key="index"
+              :value="item"
+            >
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
         <!--r_social-->
         <div class="col">
           <label for="r_social" class="form-label"
@@ -779,7 +807,7 @@
 // Stores
 import { useModalStore } from "../../../../stores/ui/modal";
 import { useAlertStore } from "../../../../stores/ui/alert";
-
+import { activity } from "../../../../libs/bases";
 import { useAuthStore } from "../../../../stores/auth";
 
 // Ref, from vue
@@ -810,6 +838,7 @@ const value = ref([false]);
 
 const formData = ref({
   account: {
+    activity: null,
     r_social: null,
     nit: null,
     tel: null,
@@ -831,6 +860,9 @@ const countryCodeError = ref(null);
 // Rules for vuelidate -->
 const rules = {
   account: {
+    activity: {
+      required: helpers.withMessage("Actividad es requerida", required),
+    },
     r_social: {
       required: helpers.withMessage("La razón social es requerida", required),
       minLength: helpers.withMessage(
