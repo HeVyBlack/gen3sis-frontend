@@ -39,7 +39,11 @@
             {{ error.$message }}*
           </div>
         </div>
-
+        <p>
+          <router-link :to="{ name: 'part-restore-password' }"
+            >¿Olvidaste tu contraseña?</router-link
+          >
+        </p>
         <div class="text-center">
           <button
             type="submit"

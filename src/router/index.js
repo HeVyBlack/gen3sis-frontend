@@ -78,6 +78,20 @@ const router = createRouter({
           name: "eng-signin",
           component: EngSignIn,
         },
+        {
+          path: "restore-password",
+          name: "eng-restore-password",
+          component: () => {
+            return import("../components/eng/RestorePassword.vue");
+          },
+        },
+        {
+          path: "new-password",
+          name: "eng-new-password",
+          component: () => {
+            return import("../components/eng/NewPassword.vue");
+          },
+        },
       ],
     },
     {
@@ -90,6 +104,20 @@ const router = createRouter({
           path: "",
           name: "part-signin",
           component: PartSignIn,
+        },
+        {
+          path: "restore-password",
+          name: "part-restore-password",
+          component: () => {
+            return import("../components/part/RestorePassword.vue");
+          },
+        },
+        {
+          path: "new-password",
+          name: "part-new-password",
+          component: () => {
+            return import("../components/part/NewPassword.vue");
+          },
         },
       ],
     },
@@ -147,7 +175,14 @@ router.beforeEach((to) => {
   // Ref user and staff_token
   const { user, staff_token } = storeToRefs(authStore);
   // People auth, can't access to this routes anymore
-  const withOutAuth = ["/eng", "/part"];
+  const withOutAuth = [
+    "/eng",
+    "/eng/restore-password",
+    "/eng/new-password",
+    "/part",
+    "/part/restore-password",
+    "/part/new-password",
+  ];
   // If route that the user is going to, is withOutAuth, and, user is auth
   if (withOutAuth.includes(to.path) && user.value) {
     // Send him to index
