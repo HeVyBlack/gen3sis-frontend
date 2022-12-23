@@ -606,9 +606,11 @@
     <!--certs-->
     <div>
       <label class="form-label"
-        ><strong>Tus certificados </strong>(escribe, y luego dale click en el
-        botón de enviar)</label
-      >
+        ><strong
+          >¿Qué plataformas y/o servicios tienes experiencia o haz
+          manejado?</strong
+        >(escribe, y luego dale click en el botón de enviar)
+      </label>
       <div class="row">
         <div class="col p-2 my-3">
           <label for="input_certs" class="form-label"
