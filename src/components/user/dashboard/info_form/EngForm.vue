@@ -938,8 +938,8 @@ const rules = {
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "El nombre debe de ser menor a 15 carácteres",
-      maxLength(15)
+      "El nombre debe de ser menor a 80 carácteres",
+      maxLength(80)
     ),
   },
   last_name: {
@@ -949,8 +949,8 @@ const rules = {
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "El apellido debe de ser menor a 15 carácteres",
-      maxLength(15)
+      "El apellido debe de ser menor a 80 carácteres",
+      maxLength(80)
     ),
   },
   city: {
@@ -1111,7 +1111,7 @@ const saveCerts = () => {
   if (
     cert_value.value &&
     cert_value.value.length > 0 &&
-    cert_value.value.length < 14
+    cert_value.value.length < 80
   ) {
     // Push input's content to const certs
     formData.value.certs.push({ cert: cert_value.value });
@@ -1119,9 +1119,9 @@ const saveCerts = () => {
     cert_value.value = "";
     // And, set the alert to null
     cert_value_error.value = null;
-  } else if (cert_value.value && cert_value.value.length > 14) {
+  } else if (cert_value.value && cert_value.value.length > 80) {
     // If input has more than 14 characteres, set an alert
-    cert_value_error.value = "El certificado debe ser menos a 14 digítos*";
+    cert_value_error.value = "El certificado debe ser menos a 80 digítos*";
   }
 };
 const clearCerts = () => {
