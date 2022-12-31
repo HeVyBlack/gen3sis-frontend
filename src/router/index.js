@@ -38,6 +38,7 @@ import StaffDashBoard from "../views/staff/DashBoard.vue";
 // Comps
 import StaffSearchUsers from "../components/staff/SearchUsers.vue";
 import ManageTickets from "../components/staff/ManageTickets.vue";
+import CreateNewUser from "../components/staff/CreateUser.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,11 @@ const router = createRouter({
               path: "manage-tickets",
               name: "staff-manage-tickets",
               component: ManageTickets,
+            },
+            {
+              path: "staff-create-user",
+              name: "staff-create-user",
+              component: CreateNewUser,
             },
           ],
         },

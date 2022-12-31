@@ -29,6 +29,11 @@
                   Gestionar tickets
                   <font-awesome-icon icon="fa-solid fa-chevron-right" /></li
               ></router-link>
+              <router-link :to="{ name: 'staff-create-user' }">
+                <li class="list-group-item">
+                  Crea un nuevo usuario
+                  <font-awesome-icon icon="fa-solid fa-chevron-right" /></li
+              ></router-link>
             </ul>
           </div>
         </div>
