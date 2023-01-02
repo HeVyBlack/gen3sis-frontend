@@ -37,7 +37,7 @@
           {{ error.$message }}
         </div>
         <input
-          type="text"
+          type="password"
           class="form-control px-5 py-2"
           id="password"
           aria-describedby="password_help"
@@ -1258,11 +1258,19 @@ const postForm = async () => {
   await axios
     .post("staff/create-new-eng", formToSubmit)
     .then(async (res) => {
-      console.log(res.data);
+      // Set an alert, with res.data
+      alertSotre.setAlert(
+        "alert-success",
+        Array.isArray(res.data) ? res.data : [res.data]
+      );
     })
     .catch((err) => {
-      // If there's any error, set an alert with err.response.data
-      alertSotre.setAlert("alert-danger", [err.response.data]);
+      alertSotre.setAlert(
+        "alert-danger",
+        Array.isArray(err.response.data)
+          ? err.response.data
+          : [err.response.data]
+      );
     });
   modalStore.resetModal();
 };
