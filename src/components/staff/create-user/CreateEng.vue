@@ -1,13 +1,17 @@
 <template>
   <div class="container px-5">
-    <label for="fillForm" class="btn">¿Desea rellenar el formulario?</label
+    <label for="fillForm" class="btn" @click="fillForm = !fillForm">{{
+      fillForm ? "Rellenando formulario" : "¿Desea rellenar el formulario?"
+    }}</label
     ><br />
-    <input type="checkbox" id="fillForm" v-model="fillForm" />
+
     <div class="row mb-3">
       <div class="col">
-        <label for="name" class="form-label"><strong>Correo</strong></label>
+        <label for="eng_email" class="form-label"
+          ><strong>Correo</strong></label
+        >
         <div
-          id="name_help"
+          id="email_help"
           class="form-text error"
           v-for="error in v$.email.$errors"
           :key="error.$uid"
@@ -17,15 +21,15 @@
         <input
           type="text"
           class="form-control px-5 py-2"
-          id="name"
-          aria-describedby="name_help"
+          id="eng_email"
+          aria-describedby="email_help"
           v-model="formData.email"
         />
       </div>
       <div class="col">
         <label for="name" class="form-label"><strong>Contraseña</strong></label>
         <div
-          id="name_help"
+          id="password_help"
           class="form-text error"
           v-for="error in v$.password.$errors"
           :key="error.$uid"
@@ -35,8 +39,8 @@
         <input
           type="text"
           class="form-control px-5 py-2"
-          id="name"
-          aria-describedby="name_help"
+          id="password"
+          aria-describedby="password_help"
           v-model="formData.password"
         />
       </div>
@@ -960,8 +964,6 @@
 import { useModalStore } from "../../../stores/ui/modal";
 import { useAlertStore } from "../../../stores/ui/alert";
 
-import { useAuthStore } from "../../../stores/auth";
-
 // Ref, from vue
 import { ref } from "vue";
 
@@ -978,12 +980,10 @@ import {
 } from "@vuelidate/validators";
 
 import axios from "axios";
-import router from "../../../router";
 
 // --> State <--
 const modalStore = useModalStore();
 const alertSotre = useAlertStore();
-const authstore = useAuthStore();
 
 const checkbox = ref(null);
 

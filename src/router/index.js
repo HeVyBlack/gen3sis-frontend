@@ -218,6 +218,7 @@ router.beforeEach((to) => {
     "/staff/dashboard",
     "/staff/dashboard/search-users",
     "/staff/dashboard/manage-tickets",
+    "/staff/dashboard/staff-create-user",
   ];
   // If route that the user is goint to, is onlyStaff, and, user hasn't staff_token
   if (onlyStaff.includes(to.path) && !staff_token.value) {
