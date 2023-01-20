@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col"><CreateEng /></div>
-      <div class="col"><CreatePart /></div>
+      <div class="col"><strong>Ingeniero:</strong> <CreateEng /></div>
+      <div class="col"><strong>Partner:</strong> <CreatePart /></div>
     </div>
   </div>
 </template>
