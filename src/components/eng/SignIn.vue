@@ -87,6 +87,8 @@ const formData = ref({
   email: "",
   password: "",
 });
+
+
 // Const that contains rules, for Vuelidate
 const rules = {
   email: {

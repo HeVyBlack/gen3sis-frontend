@@ -9,7 +9,6 @@
             class="list__item item"
             v-for="(ticket, index) in tickets"
             :key="index"
-            @click="initModal(ticket)"
           >
             <va-list-item-section>
               <va-list-item-label>
@@ -28,7 +27,18 @@
             </va-list-item-section>
 
             <va-list-item-section icon>
-              <va-icon name="remove_red_eye" color="background-tertiary" />
+              <va-icon
+                class="mx-2"
+                name="fas_calendar_check"
+                color="#0062ff"
+                @click="initModal(ticket)"
+              />
+              <va-icon
+                class="mx-2"
+                name="remove_red_eye"
+                color="#0062ff"
+                @click="initModal(ticket)"
+              />
             </va-list-item-section>
           </va-list-item>
         </va-list>

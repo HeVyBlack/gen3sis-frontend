@@ -19,6 +19,17 @@
               /></router-link>
             </h6>
           </li>
+          <li
+            class="list-group-item"
+            v-if="user.verified_info && user.type === 'engineer'"
+          >
+            <h6>
+              <router-link :to="{ name: 'eng-add-report' }"
+                >Agrega un reporte
+                <font-awesome-icon icon="fa-solid fa-caret-right"
+              /></router-link>
+            </h6>
+          </li>
           <li class="list-group-item" v-if="user.type == 'engineer'">
             <img
               src="../../assets/1932-Economic_research.jpg"

@@ -196,6 +196,14 @@
                 <li class="list-group-item">
                   Número de ticket: {{ ticket.num_ticket }}
                 </li>
+                <p class="my-2">Reportes</p>
+                <va-tree-view :nodes="ticket.reports">
+                  <template #content="rep">
+                    <button class="btn btn-default" @click="reportTicket(rep)">
+                      {{ rep.date }}
+                    </button>
+                  </template>
+                </va-tree-view>
               </ul>
             </div>
           </div>
@@ -315,6 +323,56 @@
           <va-button @click="putEditedTicket" color="primary">Editar</va-button>
         </va-card-actions>
       </va-modal>
+      <va-modal
+        v-model="showReportModal"
+        no-padding
+        :hide-default-actions="true"
+      >
+        <va-card-title
+          >Reporte del ticket: {{ ticket.num_ticket }}</va-card-title
+        >
+        <va-card-content>
+          <ul>
+            {{
+              report
+            }}
+            <li>Fecha: {{ report.date }}</li>
+            <li>Cliente: {{ report.client }}</li>
+            <li>Objetivos: {{ report.target }}</li>
+            <li>Tiempo empleado: {{ report.time }}</li>
+            <li>Actividades realizadas: {{ report.activities }}</li>
+            <li>Hallazgos adicionales: {{ report.addi_find }}</li>
+            <li>
+              Link a la grabacion:
+              <a
+                class="text-primary"
+                :href="report.link_record"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Link</a
+              >
+            </li>
+            <li>Resolucion del caso: {{ report.rel_case }}</li>
+            <li>
+              Estado del caso:
+              {{ report.case_state ? "Cerrado" : "Aun abierto" }}
+            </li>
+            <ul v-if="report.files && report.files.length > 0">
+              <p>Archivos:</p>
+              <li v-for="(file, index) in report.files" :key="index">
+                {{ index }}.
+                <a
+                  :href="file"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary"
+                  >{{ file.split("public/")[1] }}</a
+                >
+              </li>
+            </ul>
+          </ul>
+        </va-card-content>
+      </va-modal>
     </template>
   </div>
 </template>
@@ -382,6 +440,8 @@ const rules = {
 const v$ = useVuelidate(rules, ticketToSearch);
 
 const tickets = ref(null);
+
+const report = ref(null);
 
 const navOptions = ref({});
 
@@ -461,6 +521,8 @@ const initModal = (item) => {
 
 const showEditModal = ref(false);
 
+const showReportModal = ref(false);
+
 const ticketToEdit = ref({
   init_date: null,
   fin_date: null,
@@ -512,6 +574,11 @@ const editTicket = (ticket) => {
     }
   }
   showEditModal.value = !showEditModal.value;
+};
+
+const reportTicket = (rep) => {
+  report.value = rep;
+  showReportModal.value = !showReportModal.value;
 };
 
 const putEditedTicket = async () => {

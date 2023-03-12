@@ -142,6 +142,13 @@ const router = createRouter({
           name: "get-tickets",
           component: getTickets,
         },
+        {
+          path: "add-report",
+          name: "eng-add-report",
+          component: () => {
+            return import("../components/user/dashboard/AddReport.vue");
+          },
+        },
       ],
     },
     {
@@ -204,11 +211,18 @@ router.beforeEach((to) => {
   }
 
   // Only verified_info
-  const onlyVeriInfo = ["/dashboard/get-tickets"];
+  const onlyVerifyInfo = ["/dashboard/get-tickets", "/dashboard/add-report"];
 
-  if (onlyVeriInfo.includes(to.path)) {
+  if (onlyVerifyInfo.includes(to.path)) {
     if (!user.value || !user.value.verified_info) {
       return "/";
+    }
+    const onlyEngineer = ["/dashboard/add-report"];
+
+    if (onlyEngineer.includes(to.path)) {
+      if (user.value.type !== "engineer") {
+        return "/";
+      }
     }
   }
 
