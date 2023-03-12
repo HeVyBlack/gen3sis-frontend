@@ -333,9 +333,6 @@
         >
         <va-card-content>
           <ul>
-            {{
-              report
-            }}
             <li>Fecha: {{ report.date }}</li>
             <li>Cliente: {{ report.client }}</li>
             <li>Objetivos: {{ report.target }}</li>
