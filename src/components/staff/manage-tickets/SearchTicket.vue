@@ -424,12 +424,12 @@ const rules = {
   },
   num_ticket: {
     minLength: helpers.withMessage(
-      "El número de ticket no puede tener menos de 3 dígitos",
-      minLength(3)
+      "El número de ticket no puede tener menos 1 dígito",
+      minLength(1)
     ),
     maxLength: helpers.withMessage(
-      "El número de ticket no puede tener más de 3 dígitos",
-      maxLength(3)
+      "El número de ticket no puede tener más de 5 dígitos",
+      maxLength(5)
     ),
   },
 };

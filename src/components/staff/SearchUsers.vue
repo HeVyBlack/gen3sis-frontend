@@ -36,15 +36,15 @@ import { useToast } from "vuestic-ui";
 const staffStore = useStaffStore();
 const { ticket } = storeToRefs(staffStore);
 
-const aux = ref({ eng: null, part: null });
+const aux = ref({ eng: [], part: null });
 
 const { init } = useToast();
 
 watchEffect(() => {
-  if (ticket.value.eng) {
-    if (ticket.value.eng != aux.value.eng) {
-      aux.value.eng = ticket.value.eng;
-      init("Ingeniero agregado");
+  if (ticket.value.eng.length > 0) {
+    if (ticket.value.eng.length !== aux.value.eng.length) {
+      aux.value.eng = [...ticket.value.eng];
+      init({ message: "Lista de ingenieros actualizada", color: "primary" });
     }
   }
   if (ticket.value.part) {
@@ -53,7 +53,7 @@ watchEffect(() => {
       init("Partner agregado");
     }
   }
-  if (ticket.value.part && ticket.value.eng) {
+  if (ticket.value.part && ticket.value.eng.length > 0) {
     init({ message: "Ticket listo para crear", color: "success" });
   }
 });

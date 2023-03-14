@@ -1,304 +1,203 @@
 <template>
-  <div class="mb-3">
-    <h4><strong>Nuevo Ticket</strong></h4>
-    <label for="cod_eng" class="form-label">Código de ingeniero</label>
-    <div
-      id="emailHelp"
-      class="form-text error"
-      v-for="error in v$.cod_eng.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}*
-    </div>
-    <input
-      type="number"
-      class="form-control"
-      id="cod_eng"
-      placeholder="Ingresa el código ingeniero"
-      v-model="newTicket.cod_eng"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="cod_part" class="form-label">Código de partner</label>
-    <div
-      id="emailHelp"
-      class="form-text error"
-      v-for="error in v$.cod_part.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}*
-    </div>
-    <input
-      type="number"
-      class="form-control"
-      id="cod_part"
-      placeholder="Ingresa el código partner"
-      v-model="newTicket.cod_part"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="init_date" class="form-label">Fecha Inicio</label>
-    <div
-      id="emailHelp"
-      class="form-text error"
-      v-for="error in v$.init_date.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}*
-    </div>
-    <input
-      type="date"
-      class="form-control"
-      id="init_date"
-      placeholder="Ingresa la fecha de inicio"
-      v-model="newTicket.init_date"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="fin_date" class="form-label">Fecha Finalización</label>
-    <div
-      id="emailHelp"
-      class="form-text error"
-      v-for="error in v$.fin_date.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}*
-    </div>
-    <input
-      type="date"
-      class="form-control"
-      id="fin_date"
-      placeholder="Ingresa la fecha de finalización"
-      v-model="newTicket.fin_date"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="hours" class="form-label">Horas</label>
-    <div
-      id="emailHelp"
-      class="form-text error"
-      v-for="error in v$.hours.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}*
-    </div>
-    <input
-      type="number"
-      class="form-control"
-      id="hours"
-      placeholder="Ingresa las horas"
-      v-model="newTicket.hours"
-    />
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Estado</label>
-    <div
-      id="emailHelp"
-      class="form-text error"
-      v-for="error in v$.state.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}*
-    </div>
-    <select
-      class="form-select"
-      aria-label="Default select example"
-      v-model="newTicket.state"
-    >
-      <option :value="null" selected>Selecciona el estado</option>
-      <option :value="false">Aún activo</option>
-      <option :value="true">Inactivo</option>
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="desc" class="form-label">Desc</label>
-    <div
-      id="emailHelp"
-      class="form-text error"
-      v-for="error in v$.desc.$errors"
-      :key="error.$uid"
-    >
-      {{ error.$message }}*
-    </div>
-    <textarea
-      id="desc"
-      class="form-control"
-      placeholder="Ingresa la descripción"
-      v-model="newTicket.desc"
-      maxlength="450"
-    />
-  </div>
-
-  <label class="btn btn-dark" @click="submitTicket">Enviar</label>
-  <va-modal v-model="showModal" hide-default-actions
-    ><va-card-title> Seguro? </va-card-title>
-    <va-card-content>
-      Estás a punto de crear un nuevo ticket.
-      <h6><strong>Tiene esta información:</strong></h6>
-      <div class="container p-2 m-2">
-        <div class="row">
-          <div class="col">
-            <ul class="list-group">
-              <li class="list-group-item">
-                <strong>Email de ingeniero: </strong> {{ newTicket.cod_eng }}
-              </li>
-              <li class="list-group-item">
-                <strong>Email de partner: </strong> {{ newTicket.cod_part }}
-              </li>
-              <li class="list-group-item">
-                <strong>Fecha inicialización: </strong>
-                {{ newTicket.init_date }}
-              </li>
-              <li class="list-group-item">
-                <strong>Fecha de finalización: </strong>
-                {{ newTicket.fin_date }}
-              </li>
-              <li class="list-group-item">
-                <strong>Horas: </strong> {{ newTicket.hours }}
-              </li>
-              <li class="list-group-item">
-                <strong>Estado: </strong> {{ newTicket.state }}
-              </li>
-              <li class="list-group-item">
-                <strong>Descripción: </strong> {{ newTicket.desc }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      ¿Quieres continuar?
-    </va-card-content>
-    <label class="btn btn-light mx-3" @click="showModal = !showModal">No</label>
-    <label class="btn btn-success mx-3" @click="postTicket">Si</label>
-  </va-modal>
+  <form
+    action="post"
+    enctype="application/x-www-form-urlencoded"
+    @submit.prevent="handleSubmit"
+  >
+    <fieldset :disabled="disabled">
+      <legend>Crear Ticket</legend>
+      <ul>
+        <li>
+          <h5>Ingresa los ingenieros</h5>
+          <ul>
+            <li v-for="(eng, index) in newTicket.engs" :key="eng" class="my-3">
+              <label :for="`eng_${index}`" class="mx-3"
+                ><strong>Ingeniero #{{ index }}</strong></label
+              >
+              <input
+                required
+                type="text"
+                :name="`eng_${index}`"
+                :id="`eng_${index}`"
+                placeholder="Email o Codigo"
+                :value="engs[index]"
+                @input="($event) => handleInput($event, index)"
+              />
+            </li>
+            <div class="container m-3 p-2">
+              <button
+                class="btn btn-success mx-2"
+                @click="addEng()"
+                type="button"
+              >
+                Agregar
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger mx-2"
+                @click="removeEng"
+              >
+                Quitar
+              </button>
+            </div>
+          </ul>
+        </li>
+        <li class="mb-3">
+          <label for="part" class="mx-3"
+            ><strong>Codigo/Email Partner</strong></label
+          >
+          <input
+            type="text"
+            name="part"
+            id="part"
+            required
+            v-model.number="newTicket.part"
+          />
+        </li>
+        <li class="mb-3">
+          <label for="make_date" class="mx-3"
+            ><strong>Fecha de creacion del ticket</strong></label
+          >
+          <input
+            id="make_date"
+            name="make_date"
+            type="date"
+            required
+            :max="newTicket.close_date ?? ''"
+            v-model="newTicket.make_date"
+          />
+        </li>
+        <li class="mb-3">
+          <label for="close_date" class="mx-3"
+            ><strong>Fecha de cierre</strong></label
+          >
+          <input
+            type="date"
+            name="close_date"
+            id="close_date"
+            required
+            :min="newTicket.make_date ?? ''"
+            v-model="newTicket.close_date"
+          />
+        </li>
+        <li class="mb-3">
+          <label for="service_type" class="mx-3"
+            ><strong>Tipo de servicio</strong></label
+          >
+          <select
+            name="sevice_type"
+            id="sevice_type"
+            required
+            v-model="newTicket.service_type"
+          >
+            <option value="">Selecciona el tipo de servicio</option>
+            <option value="Bolsa de Horas">Bolsa de Horas</option>
+            <option value="Horas por Demanda">Horas por Demanda</option>
+            <option value="Contrato">Contrato</option>
+            <option value="Proyecto">Proyecto</option>
+          </select>
+        </li>
+        <li class="mb-3">
+          <label for="state" class="mx-3"
+            ><strong>Selecciona el estado</strong></label
+          >
+          <select name="state" id="state" required v-model="newTicket.state">
+            <option value="">Elige el estado</option>
+            <option :value="false">Abierto</option>
+            <option :value="true">Cerrado</option>
+          </select>
+        </li>
+        <li class="mb-3">
+          <label for="desc" class="mx-3"
+            ><strong>Ingresa la descripcion</strong></label
+          >
+          <ul>
+            <li>
+              <textarea
+                name="desc"
+                id="desc"
+                required
+                minlength="10"
+                maxlength="550"
+                v-model="newTicket.desc"
+              ></textarea>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <button type="submit" class="btn btn-dark">Crear</button>
+    </fieldset>
+  </form>
 </template>
 
 <script setup>
+import { useToast } from "vuestic-ui";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
-import useVuelidate from "@vuelidate/core";
-import { required, helpers, maxLength, minLength } from "@vuelidate/validators";
-import { useModalStore } from "../../../stores/ui/modal";
-import { useAlertStore } from "../../../stores/ui/alert";
 import { useStaffStore } from "../../../stores/staff";
 
 const newTicket = ref({
-  cod_eng: null,
-  cod_part: null,
-  init_date: null,
-  fin_date: null,
-  hours: null,
+  engs: [""],
+  part: null,
+  make_date: null,
+  close_date: null,
+  service_type: null,
   state: null,
   desc: null,
 });
 
-const modalStore = useModalStore();
-const alertStore = useAlertStore();
+const { init } = useToast();
+
 const staffStore = useStaffStore();
 
 const { ticket } = storeToRefs(staffStore);
 
+let engs = [""];
+
+const disabled = ref(false);
+
 onMounted(() => {
-  if (ticket.value.eng && ticket.value.part) {
-    newTicket.value.cod_eng = ticket.value.eng.id_code;
+  if (ticket.value.eng.length > 0 && ticket.value.part) {
+    const aux = ticket.value.eng.map((e) => e.id_code);
+    newTicket.value.engs = [...aux];
+    engs = [...aux];
     newTicket.value.cod_part = ticket.value.part.id_code;
-    staffStore.resetTicket();
+    staffStore.$reset();
   }
 });
 
-const rules = {
-  cod_eng: {
-    required: helpers.withMessage(
-      "El código de ingeniero es necesario",
-      required
-    ),
-    minLength: helpers.withMessage(
-      "El código de ingeniero no puede ser menor a 10 digítos",
-      minLength(10)
-    ),
-    maxLength: helpers.withMessage(
-      "El código de ingeniero no puede ser mayor a 10 digítos",
-      maxLength(10)
-    ),
-  },
-  cod_part: {
-    required: helpers.withMessage(
-      "El código de partner es necesario",
-      required
-    ),
-    minLength: helpers.withMessage(
-      "El código de partner no puede ser menor a 10 digítos",
-      minLength(10)
-    ),
-    maxLength: helpers.withMessage(
-      "El código de partner no puede ser mayor a 10 digítos",
-      maxLength(10)
-    ),
-  },
-  init_date: {
-    required: helpers.withMessage("La fecha es requerida", required),
-  },
-  fin_date: {
-    required: helpers.withMessage("La fecha es requerida", required),
-  },
-  hours: {
-    required: helpers.withMessage("La(s) horas son requerida", required),
-    maxLength: helpers.withMessage(
-      "La hora no puede ser mayor a 6 dígitos",
-      maxLength(6)
-    ),
-  },
-  state: {
-    required: helpers.withMessage("El estado es requerido", required),
-  },
-  desc: {
-    maxLength: helpers.withMessage(
-      "La descripción debe ser menor a 80 carácteres es requerida",
-      maxLength(450)
-    ),
-  },
-};
+function handleInput(e, index) {
+  engs[index] = e.target.value;
+}
 
-const v$ = useVuelidate(rules, newTicket);
+function addEng() {
+  engs.push("");
+  newTicket.value.engs.push("");
+}
 
-const submitTicket = async () => {
-  alertStore.resetAlert();
-  const result = await v$.value.$validate();
-  if (result) {
-    showModal.value = !showModal.value;
+function removeEng() {
+  if (engs.length > 1 && newTicket.value.engs.length > 1) {
+    engs.pop();
+    newTicket.value.engs.pop();
+  } else return;
+}
+
+async function handleSubmit() {
+  disabled.value = !disabled.value;
+  try {
+    newTicket.value.engs = [...engs];
+    const res = await axios.post("/staff/set-ticket", newTicket.value);
+    if (Array.isArray(res.data)) {
+      res.data.forEach((e) => init({ message: e, color: "success" }));
+    } else init({ message: res.data, color: "success" });
+  } catch (e) {
+    if (Array.isArray(e.response.data)) {
+      e.response.data.forEach((e) => init({ message: e, color: "danger" }));
+    } else init({ message: e.response.data, color: "danger" });
   }
-};
-
-const postTicket = async () => {
-  modalStore.setType("wait_offcanvas");
-  await axios
-    .post("staff/set-ticket", newTicket.value)
-    .then((res) => {
-      if (res.data && res.data.success_msg && res.data.num_ticket) {
-        modalStore.resetModal();
-        alertStore.setAlert("alert-success", [
-          `${res.data.success_msg} || Número de ticket: ${res.data.num_ticket}`,
-        ]);
-        showModal.value = !showModal.value;
-      }
-    })
-    .catch((err) => {
-      modalStore.resetModal();
-      showModal.value = !showModal.value;
-      // If there's any error
-      if (err.response.data) {
-        // If there's an error_msg, set it as an alert
-        alertStore.setAlert("alert-danger", err.response.data);
-      } else alertStore.setAlert("alert-danger", ["Hubo un error"]); // Else, just put an alert saying, there's an error
-    });
-};
-
-const showModal = ref(false);
+  disabled.value = !disabled.value;
+}
 </script>
 
-<style scoped>
-.error {
-  color: red;
-}
-</style>
+<style scoped></style>

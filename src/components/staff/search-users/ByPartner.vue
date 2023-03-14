@@ -358,9 +358,7 @@ const getUsers = async () => {
     // If value is not a null
     if (formData.value.account[propery]) {
       // Set it in url
-      url =
-        url +
-        `info.account.${propery}=${formData.value.account[propery].trim()}&`;
+      url = url + `info.account.${propery}=${formData.value.account[propery]}&`;
     }
   }
   // Make a for in, in partner cont section
@@ -368,8 +366,7 @@ const getUsers = async () => {
     // If value is not a null
     if (formData.value.cont[propery]) {
       // Set it in url
-      url =
-        url + `info.cont.${propery}=${formData.value.cont[propery].trim()}&`;
+      url = url + `info.cont.${propery}=${formData.value.cont[propery]}&`;
     }
   }
 

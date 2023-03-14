@@ -4,7 +4,7 @@ export const useStaffStore = defineStore({
   id: "staffstore",
   state: () => ({
     ticket: {
-      eng: null,
+      eng: [],
       part: null,
     },
   }),
@@ -13,7 +13,7 @@ export const useStaffStore = defineStore({
       this.ticket.eng = this.ticket.part = null;
     },
     setEng(eng) {
-      this.ticket.eng = eng;
+      this.ticket.eng.push(eng);
     },
     setPart(part) {
       this.ticket.part = part;

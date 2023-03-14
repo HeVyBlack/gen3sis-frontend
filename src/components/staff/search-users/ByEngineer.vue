@@ -652,14 +652,14 @@
                   </li>
                   <li class="list-group-item">
                     Experiencia:
-                    <va-infinite-scroll>
+                    <va-infinite-scroll :load="() => {}">
                       {{ item.info?.exp }}
                     </va-infinite-scroll>
                   </li>
                   <template v-if="item.info.certs?.length > 0">
                     <li class="list-group-item">
                       Certificados:
-                      <va-infinite-scroll>
+                      <va-infinite-scroll :load="() => {}">
                         <div
                           v-for="(item, index) in item.info.certs"
                           :key="index"

@@ -4,11 +4,11 @@
       v-model="showCollapse"
       color="#212121"
       :header="
-        ticket.part && ticket.eng
+        ticket.part && ticket.eng.length > 0
           ? 'Crear ticket (Todo listo)'
-          : !ticket.part && ticket.eng
+          : !ticket.part && ticket.eng.length > 0
           ? 'Crear ticket (Falta partner)'
-          : ticket.part && !ticket.eng
+          : ticket.part && ticket.eng.length === 0
           ? 'Crear ticket (Falta ingeniero)'
           : 'Crear ticket (Falta ingeniero y partner)'
       "
@@ -40,7 +40,7 @@
               <va-list-item-section icon>
                 <va-icon
                   :name="ticket.part ? 'remove_red_eye' : 'visibility_off'"
-                  color="background-tertiary"
+                  color="primary"
                   :class="ticket.part ? 'hover_pointer' : ''"
                   @:click="ticket.part ? initModal(ticket.part) : null"
                 />
@@ -52,14 +52,25 @@
 
             <va-list-item class="list__item">
               <va-list-item-section>
-                <template v-if="ticket.eng"
-                  ><va-icon name="person" /><va-list-item-label>
-                    Código: {{ ticket.eng.id_code }}
-                  </va-list-item-label>
-                  <va-list-item-label>
-                    Email: {{ ticket.eng.email }}
-                  </va-list-item-label></template
-                >
+                <template v-if="ticket.eng.length > 0">
+                  <div v-for="(eng, index) in ticket.eng" :key="eng.id">
+                    {{ index + 1 }}<va-icon name="person" />
+                    <va-list-item-label>
+                      Código: {{ eng.id_code }}
+                    </va-list-item-label>
+                    <va-list-item-label>
+                      Email: {{ eng.email }}
+                    </va-list-item-label>
+                    <va-list-item-section icon>
+                      <va-icon
+                        :name="ticket.eng ? 'remove_red_eye' : 'visibility_off'"
+                        color="primary"
+                        :class="ticket.eng ? 'hover_pointer' : ''"
+                        @:click="ticket.eng ? initModal(eng) : null"
+                      />
+                    </va-list-item-section>
+                  </div>
+                </template>
                 <template v-else
                   ><va-icon name="person_off" /><va-list-item-label>
                     No existe ingeniero </va-list-item-label
@@ -67,14 +78,6 @@
                     Por favor selecciona uno
                   </va-list-item-label></template
                 >
-              </va-list-item-section>
-              <va-list-item-section icon>
-                <va-icon
-                  :name="ticket.eng ? 'remove_red_eye' : 'visibility_off'"
-                  color="background-tertiary"
-                  :class="ticket.eng ? 'hover_pointer' : ''"
-                  @:click="ticket.eng ? initModal(ticket.eng) : null"
-                />
               </va-list-item-section>
             </va-list-item>
           </va-list>
