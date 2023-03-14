@@ -34,8 +34,8 @@ const authStore = useAuthStore();
 // Fontawesome library
 library.add(fas, fab, far);
 
-// First, call autStore's attemp function, with local storage token
-authStore.attemp(localStorage.getItem("token")).then(() => {
+// First, call autStore's attempt function, with local storage token
+authStore.attempt(localStorage.getItem("token")).then(() => {
   // If local storage has an staff token
   if (localStorage.getItem("staff_token")) {
     // Save it in authStore

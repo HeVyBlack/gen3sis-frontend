@@ -85,8 +85,8 @@
             ><strong>Tipo de servicio</strong></label
           >
           <select
-            name="sevice_type"
-            id="sevice_type"
+            name="service_type"
+            id="service_type"
             required
             v-model="newTicket.service_type"
           >
