@@ -5,6 +5,15 @@
       <div class="row px-3">
         <div class="col-sm-3 col-lg-3">
           <div class="my-3">
+            <h6><strong>¿Codigo?</strong></h6>
+            <input
+              type="number"
+              class="form-control"
+              id="code"
+              v-model.number="formData.id_code"
+            />
+          </div>
+          <div class="my-3">
             <h6><strong>¿Verificó su info?</strong></h6>
             <select class="form-select" v-model="formData.verified_info">
               <option :value="null">Selecciona</option>
@@ -312,6 +321,7 @@ const users = ref(null);
 const paginateOptions = ref({});
 
 const formData = ref({
+  id_code: null,
   verified_email: null,
   verified_info: null,
   user_checked: null,
@@ -342,14 +352,19 @@ const getUsers = async () => {
   modalStore.setType("wait_offcanvas");
   // Basics querys (type, verified email, and verified info)
 
-  if (
-    formData.value.verified_email &&
-    formData.value.verified_email != "none"
-  ) {
-    url = url + `verified_email=${formData.value.verified_email === "true"}&`;
+  if (typeof formData.value.verified_email === "boolean") {
+    url = url + `verified_email=${formData.value.verified_email}&`;
   }
-  if (formData.value.verified_info && formData.value.verified_info != "none") {
-    url = url + `verified_info=${formData.value.verified_info === "true"}&`;
+  if (typeof formData.value.verified_info === "boolean") {
+    url = url + `verified_info=${formData.value.verified_info}&`;
+  }
+
+  if (typeof formData.value.user_checked === "boolean") {
+    url = url + `user_checked=${formData.value.user_checked}&`;
+  }
+
+  if (typeof formData.value.id_code === "number") {
+    url = url + `id_code=${formData.value.id_code}&`;
   }
 
   // If type is partner
@@ -361,6 +376,7 @@ const getUsers = async () => {
       url = url + `info.account.${propery}=${formData.value.account[propery]}&`;
     }
   }
+
   // Make a for in, in partner cont section
   for (const propery in formData.value.cont) {
     // If value is not a null

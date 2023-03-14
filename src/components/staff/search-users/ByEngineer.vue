@@ -5,6 +5,16 @@
       <div class="row px-3">
         <div class="col-sm-3 col-lg-3">
           <div class="my-3">
+            <h6><strong>¿Codigo?</strong></h6>
+            <input
+              type="number"
+              class="form-control"
+              id="code"
+              v-model.number="formData.id_code"
+            />
+          </div>
+
+          <div class="my-3">
             <h6><strong>¿Verificó su info?</strong></h6>
             <select class="form-select" v-model="formData.verified_info">
               <option :value="null">Selecciona</option>
@@ -710,6 +720,7 @@ const users = ref(null);
 const paginateOptions = ref({});
 
 const formData = ref({
+  id_code: null,
   verified_email: null,
   verified_info: null,
   user_checked: null,
@@ -745,17 +756,28 @@ const getUsers = async () => {
   // Set off canvas
   modalStore.setType("wait_offcanvas");
   url = "/staff/get-users?type=engineer&";
-  if (formData.value.verified_email != null) {
+  if (typeof formData.value.verified_email === "boolean") {
     url = url + `verified_email=${formData.value.verified_email}&`;
   }
-  if (formData.value.verified_info != null) {
+
+  if (typeof formData.value.verified_info === "boolean") {
     url = url + `verified_info=${formData.value.verified_info}&`;
   }
+
+  if (typeof formData.value.user_checked === "boolean") {
+    url = url + `user_checked=${formData.value.user_checked}&`;
+  }
+
+  if (typeof formData.value.id_code === "number") {
+    url = url + `id_code=${formData.value.id_code}&`;
+  }
+
   for (const i in formData.value.engineer) {
     if (formData.value.engineer[i] != null && i != "exp_plat") {
       url = url + `info.${i}=${formData.value.engineer[i]}&`;
     }
   }
+
   await axios
     .get(url)
     .then((res) => {

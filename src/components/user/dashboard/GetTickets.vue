@@ -18,9 +18,9 @@
               <va-list-item-label caption>
                 {{
                   user.type == "engineer"
-                    ? "Para el partner número: " + ticket.cod_part
+                    ? "Partner: " + ticket.part
                     : user.type == "partner"
-                    ? "Con el ingeniero número: " + ticket.cod_eng
+                    ? "Engs: " + ticket.eng
                     : null
                 }}
               </va-list-item-label>
@@ -74,31 +74,105 @@
               <div class="col">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
-                    Código de ingeniero: {{ ticket.cod_eng }}
+                    Ingenieros:
+                    <ul class="m-2">
+                      <li v-for="(eng, index) in ticket.engs" :key="eng">
+                        {{ index }}. {{ eng }}
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="list-group-item">Partner: {{ ticket.part }}</li>
+                  <li class="list-group-item">
+                    Fecha de creacion: {{ ticket.make_date }}
                   </li>
                   <li class="list-group-item">
-                    Código de partner: {{ ticket.cod_part }}
+                    Fecha de ciere: {{ ticket.close_date }}
                   </li>
                   <li class="list-group-item">
-                    Fecha de inicio: {{ ticket.init_date }}
+                    Tiempo: {{ ticket.time || 0 }}
                   </li>
                   <li class="list-group-item">
-                    Fecha de finalización: {{ ticket.fin_date }}
-                  </li>
-                  <li class="list-group-item">Horas: {{ ticket.hours }}</li>
-                  <li class="list-group-item">
-                    Stado:
-                    {{ ticket.state === false ? "Abierto" : "Cerrado" }}
+                    Stado: {{ ticket.state === false ? "Abierto" : "Cerrado" }}
                   </li>
                   <li class="list-group-item">
-                    Descripción: {{ ticket.desc }}
+                    <textarea
+                      name="desc"
+                      id="desc"
+                      cols="25"
+                      rows="2"
+                      disabled
+                      :value="ticket.desc"
+                    ></textarea>
                   </li>
                   <li class="list-group-item">
                     Número de ticket: {{ ticket.num_ticket }}
                   </li>
+                  <p class="my-2">Reportes</p>
+                  <va-tree-view :nodes="ticket.reports">
+                    <template #content="rep">
+                      <button
+                        class="btn btn-default"
+                        @click="reportTicket(rep)"
+                      >
+                        {{ rep.date }}
+                      </button>
+                    </template>
+                  </va-tree-view>
                 </ul>
               </div>
             </div>
+          </va-card-content>
+          <va-card-actions>
+            <va-button @click="ok" color="primary">Cerrar</va-button>
+          </va-card-actions>
+        </template>
+      </va-modal>
+      <va-modal
+        v-model="showReportModal"
+        no-padding
+        :hide-default-actions="true"
+      >
+        <template #content="{ ok }">
+          <va-card-title
+            >Reporte del ticket: {{ ticket.num_ticket }}</va-card-title
+          >
+          <va-card-content>
+            <ul>
+              <li>Fecha: {{ report.date }}</li>
+              <li>Cliente: {{ report.client }}</li>
+              <li>Objetivos: {{ report.target }}</li>
+              <li>Tiempo empleado: {{ report.time }}</li>
+              <li>Actividades realizadas: {{ report.activities }}</li>
+              <li>Hallazgos adicionales: {{ report.addi_find }}</li>
+              <li>
+                Link a la grabacion:
+                <a
+                  class="text-primary"
+                  :href="report.link_record"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Link</a
+                >
+              </li>
+              <li>Resolucion del caso: {{ report.rel_case }}</li>
+              <li>
+                Estado del caso:
+                {{ report.case_state ? "Cerrado" : "Aun abierto" }}
+              </li>
+              <ul v-if="report.files && report.files.length > 0">
+                <p>Archivos:</p>
+                <li v-for="(file, index) in report.files" :key="index">
+                  {{ index }}.
+                  <a
+                    :href="file"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-primary"
+                    >{{ file.split("public/")[1] }}</a
+                  >
+                </li>
+              </ul>
+            </ul>
           </va-card-content>
           <va-card-actions>
             <va-button @click="ok" color="primary">Cerrar</va-button>
@@ -123,6 +197,7 @@ const alertStore = useAlertStore();
 
 const { user } = storeToRefs(authStore);
 const navOptions = ref({});
+
 onMounted(() => {
   modalStore.setType("wait_offcanvas");
   axios
@@ -149,6 +224,10 @@ onMounted(() => {
 const showModal = ref(false);
 
 const ticket = ref(null);
+
+const showReportModal = ref(false);
+
+const report = ref(null);
 
 const initModal = (item) => {
   ticket.value = item;
@@ -177,6 +256,11 @@ const changePage = async (page) => {
     });
   modalStore.resetModal();
 };
+
+function reportTicket(rep) {
+  report.value = rep;
+  showReportModal.value = !showReportModal.value;
+}
 </script>
 
 <style lang="scss" scoped>

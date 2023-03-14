@@ -3,6 +3,7 @@
     <fieldset :disabled="disabled" class="border border-white p-3">
       <legend>Agregar Reporte</legend>
       <div class="container">
+        <p class="text-danger">(*) son campos obligatorios</p>
         <ul>
           <va-alert
             v-for="(msg, index) in aux.msg"
@@ -13,7 +14,10 @@
             {{ msg }}
           </va-alert>
           <li>
-            <label for="num_ticket">Ingresa el numero de ticket</label>
+            <label for="num_ticket"
+              >Ingresa el numero de ticket
+              <strong class="text-danger">*</strong></label
+            >
             <input
               type="number"
               name="num_ticket"
@@ -25,7 +29,10 @@
             />
           </li>
           <li>
-            <label for="client">Ingresa el nombre del cliente</label>
+            <label for="client"
+              >Ingresa el nombre del cliente
+              <strong class="text-danger">*</strong></label
+            >
             <input
               type="text"
               minlength="3"
@@ -37,7 +44,9 @@
             />
           </li>
           <li>
-            <label for="date">Ingresa la fecha</label>
+            <label for="date"
+              >Ingresa la fecha <strong class="text-danger">*</strong></label
+            >
             <input
               type="date"
               name="date"
@@ -48,19 +57,27 @@
             />
           </li>
           <li>
-            <label for="target">Ingresa los objetivos/alcances</label>
-            <input
-              type="text"
+            <label for="target"
+              >Ingresa los objetivos/alcances
+              <strong class="text-danger">*</strong></label
+            >
+            <textarea
               name="target"
               id="target"
               v-model="form.target"
               minlength="10"
               maxlength="250"
+              cols="35"
+              rows="3"
+              placeholder="Objetivos/Alcances"
               required
             />
           </li>
           <li>
-            <label for="time">Ingresa el tiempo empleado</label>
+            <label for="time"
+              >Ingresa el tiempo empleado (horas)
+              <strong class="text-danger">*</strong></label
+            >
             <input
               type="number"
               name="time"
@@ -72,21 +89,31 @@
             />
           </li>
           <li>
-            <label for="activities">Ingrea las actividades realizadas</label>
-            <input
-              type="text"
+            <label for="activities"
+              >Ingresa las actividades realizadas
+              <strong class="text-danger">*</strong></label
+            >
+            <textarea
+              cols="35"
+              rows="3"
               name="activities"
               id="activities"
               minlength="3"
               maxlength="350"
+              placeholder="Actividades Realizadas"
               required
               v-model="form.activities"
             />
           </li>
           <li>
-            <label for="addi_find">Ingresa los hallazgos adicionales</label>
-            <input
-              type="text"
+            <label for="addi_find"
+              >Ingresa los hallazgos adicionales
+              <strong class="text-danger">*</strong></label
+            >
+            <textarea
+              cols="35"
+              rows="3"
+              placeholder="Hallazgos Adicionales"
               name="addi_find"
               id="addi_find"
               minlength="3"
@@ -96,7 +123,10 @@
             />
           </li>
           <li>
-            <label for="link_record">Ingresa el link de la grabacion</label>
+            <label for="link_record"
+              >Ingresa el link de la grabacion
+              <strong class="text-danger">*</strong></label
+            >
             <input
               type="url"
               name="link_record"
@@ -107,9 +137,13 @@
             />
           </li>
           <li>
-            <label for="rel_case">Resolucion del caso</label>
-            <input
-              type="text"
+            <label for="rel_case"
+              >Resolucion del caso <strong class="text-danger">*</strong></label
+            >
+            <textarea
+              cols="35"
+              rows="3"
+              placeholder="Resolucion"
               name="rel_case"
               id="rel_case"
               minlength="3"
@@ -119,7 +153,10 @@
             />
           </li>
           <li>
-            <label for="case_state">Ingrea el estado del caso</label>
+            <label for="case_state"
+              >Ingrea el estado del caso
+              <strong class="text-danger">*</strong></label
+            >
             <select
               name="case_state"
               id="case_state"
@@ -131,7 +168,9 @@
             </select>
           </li>
           <li>
-            <label for="files">Ingrea los archivos</label>
+            <label for="files"
+              >Ingrea los archivos <strong class="text-danger">*</strong></label
+            >
             <input
               type="file"
               name="files"
@@ -154,6 +193,7 @@ import { useAuthStore } from "../../../stores/auth";
 import axios from "axios";
 import moment from "moment";
 import { ref } from "vue";
+import router from "../../../router";
 
 const authStore = useAuthStore();
 
@@ -198,13 +238,14 @@ const handleSubmit = async () => {
       const res = await axios.post("/eng/add-report", postForm);
       alert(res.data);
       await authStore.refreshSate();
+      router.push({ name: "get-tickets" });
+      disabled.value = !disabled.value;
     } catch (e) {
       if (Array.isArray(e.response.data)) {
         aux.value.msg = e.response.data;
       } else aux.value.msg.push(e.response.data);
+      disabled.value = !disabled.value;
     }
-
-    disabled.value = !disabled.value;
   }
 };
 

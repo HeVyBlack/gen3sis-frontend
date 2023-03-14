@@ -159,10 +159,10 @@ const disabled = ref(false);
 
 onMounted(() => {
   if (ticket.value.eng.length > 0 && ticket.value.part) {
-    const aux = ticket.value.eng.map((e) => e.id_code);
+    const aux = ticket.value.eng.map((e) => e.email);
     newTicket.value.engs = [...aux];
     engs = [...aux];
-    newTicket.value.cod_part = ticket.value.part.id_code;
+    newTicket.value.part = ticket.value.part.email;
     staffStore.$reset();
   }
 });

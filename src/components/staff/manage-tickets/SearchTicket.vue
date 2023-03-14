@@ -177,18 +177,21 @@
             <div class="col">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Código de ingeniero: {{ ticket.cod_eng }}
+                  Ingenieros:
+                  <ul>
+                    <li v-for="(eng, index) in ticket.engs" :key="eng">
+                      {{ index }}, {{ eng }}
+                    </li>
+                  </ul>
+                </li>
+                <li class="list-group-item">Partner: {{ ticket.part }}</li>
+                <li class="list-group-item">
+                  Fecha de Creacion: {{ ticket.make_date }}
                 </li>
                 <li class="list-group-item">
-                  Código de partner: {{ ticket.cod_part }}
+                  Fecha de Cierre: {{ ticket.close_date }}
                 </li>
-                <li class="list-group-item">
-                  Fecha de inicio: {{ ticket.init_date }}
-                </li>
-                <li class="list-group-item">
-                  Fecha de finalización: {{ ticket.fin_date }}
-                </li>
-                <li class="list-group-item">Horas: {{ ticket.hours }}</li>
+                <li class="list-group-item">Tiempo: {{ ticket.time || 0 }}</li>
                 <li class="list-group-item">
                   Stado: {{ ticket.state === false ? "Abierto" : "Cerrado" }}
                 </li>
@@ -328,47 +331,52 @@
         no-padding
         :hide-default-actions="true"
       >
-        <va-card-title
-          >Reporte del ticket: {{ ticket.num_ticket }}</va-card-title
-        >
-        <va-card-content>
-          <ul>
-            <li>Fecha: {{ report.date }}</li>
-            <li>Cliente: {{ report.client }}</li>
-            <li>Objetivos: {{ report.target }}</li>
-            <li>Tiempo empleado: {{ report.time }}</li>
-            <li>Actividades realizadas: {{ report.activities }}</li>
-            <li>Hallazgos adicionales: {{ report.addi_find }}</li>
-            <li>
-              Link a la grabacion:
-              <a
-                class="text-primary"
-                :href="report.link_record"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Link</a
-              >
-            </li>
-            <li>Resolucion del caso: {{ report.rel_case }}</li>
-            <li>
-              Estado del caso:
-              {{ report.case_state ? "Cerrado" : "Aun abierto" }}
-            </li>
-            <ul v-if="report.files && report.files.length > 0">
-              <p>Archivos:</p>
-              <li v-for="(file, index) in report.files" :key="index">
-                {{ index }}.
+        <template #content="{ ok }"
+          ><va-card-title
+            >Reporte del ticket: {{ ticket.num_ticket }}</va-card-title
+          >
+          <va-card-content>
+            <ul>
+              <li>Fecha: {{ report.date }}</li>
+              <li>Cliente: {{ report.client }}</li>
+              <li>Objetivos: {{ report.target }}</li>
+              <li>Tiempo empleado: {{ report.time }}</li>
+              <li>Actividades realizadas: {{ report.activities }}</li>
+              <li>Hallazgos adicionales: {{ report.addi_find }}</li>
+              <li>
+                Link a la grabacion:
                 <a
-                  :href="file"
+                  class="text-primary"
+                  :href="report.link_record"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-primary"
-                  >{{ file.split("public/")[1] }}</a
+                  >Link</a
                 >
               </li>
+              <li>Resolucion del caso: {{ report.rel_case }}</li>
+              <li>
+                Estado del caso:
+                {{ report.case_state ? "Cerrado" : "Aun abierto" }}
+              </li>
+              <ul v-if="report.files && report.files.length > 0">
+                <p>Archivos:</p>
+                <li v-for="(file, index) in report.files" :key="index">
+                  {{ index }}.
+                  <a
+                    :href="file"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-primary"
+                    >{{ file.split("public/")[1] }}</a
+                  >
+                </li>
+              </ul>
             </ul>
-          </ul>
-        </va-card-content>
+          </va-card-content>
+          <va-card-actions>
+            <va-button @click="ok" color="primary">Cerrar</va-button>
+          </va-card-actions>
+        </template>
       </va-modal>
     </template>
   </div>
