@@ -66,7 +66,7 @@
               aria-label="Default select example"
               v-model="formData.info.account.activity"
             >
-              <option :value="null" selected>Selcciona tu actividad</option>
+              <option :value="null" selected>Selecciona tu actividad</option>
               <option
                 selected
                 v-for="(item, index) in activity"
@@ -146,7 +146,7 @@
                   aria-label="Default select example"
                   v-model="countryCode"
                 >
-                  <option value="0">Codigo país</option>
+                  <option value="0">Código país</option>
                   <option data-countryCode="DZ" value="213">
                     Algeria (+213)
                   </option>
@@ -1048,11 +1048,11 @@ const rules = {
           })
         ),
         minLength: helpers.withMessage(
-          "La razón social debe contener al menos 3 carácteres",
+          "La razón social debe contener al menos 3 caracteres",
           minLength(3)
         ),
         maxLength: helpers.withMessage(
-          "La razón social debe contener menos 80 carácteres",
+          "La razón social debe contener menos 80 caracteres",
           maxLength(80)
         ),
       },
@@ -1064,11 +1064,11 @@ const rules = {
           })
         ),
         minLength: helpers.withMessage(
-          "El nit contener al menos 8 carácteres",
+          "El nit contener al menos 8 caracteres",
           minLength(8)
         ),
         maxLength: helpers.withMessage(
-          "El nit debe contener menos de 15 carácteres",
+          "El nit debe contener menos de 15 caracteres",
           maxLength(15)
         ),
       },
@@ -1080,17 +1080,17 @@ const rules = {
           })
         ),
         minLength: helpers.withMessage(
-          "El teléfono contener al menos 10 carácteres",
+          "El teléfono contener al menos 10 caracteres",
           minLength(10)
         ),
         maxLength: helpers.withMessage(
-          "El teléfono debe contener menos de 14 carácteres",
+          "El teléfono debe contener menos de 14 caracteres",
           maxLength(12)
         ),
       },
       ext: {
         maxLength: helpers.withMessage(
-          "La extensión debe contener menos de 6 carácteres",
+          "La extensión debe contener menos de 6 caracteres",
           maxLength(6)
         ),
       },
@@ -1104,11 +1104,11 @@ const rules = {
           })
         ),
         minLength: helpers.withMessage(
-          "La posición debe tener al menos 3 carácteres ",
+          "La posición debe tener al menos 3 caracteres ",
           minLength(3)
         ),
         maxLength: helpers.withMessage(
-          "La posición debe tener menos de 80 carácteres ",
+          "La posición debe tener menos de 80 caracteres ",
           maxLength(80)
         ),
       },
@@ -1120,11 +1120,11 @@ const rules = {
           })
         ),
         minLength: helpers.withMessage(
-          "El nombre debe tener al menos 3 carácteres",
+          "El nombre debe tener al menos 3 caracteres",
           minLength(3)
         ),
         maxLength: helpers.withMessage(
-          "El nombre debe tener menos de 15 carácteres",
+          "El nombre debe tener menos de 15 caracteres",
           maxLength(15)
         ),
       },
@@ -1136,11 +1136,11 @@ const rules = {
           })
         ),
         minLength: helpers.withMessage(
-          "El apellido debe tener al menos 3 carácteres",
+          "El apellido debe tener al menos 3 caracteres",
           minLength(3)
         ),
         maxLength: helpers.withMessage(
-          "El apellido debe tener menos de 15 carácteres",
+          "El apellido debe tener menos de 15 caracteres",
           maxLength(15)
         ),
       },
@@ -1161,11 +1161,11 @@ const rules = {
           })
         ),
         minLength: helpers.withMessage(
-          "El teléfono debe tener al menos 10 carácteres",
+          "El teléfono debe tener al menos 10 caracteres",
           minLength(10)
         ),
         maxLength: helpers.withMessage(
-          "El teléfono debe tener menos de 12 carácteres",
+          "El teléfono debe tener menos de 12 caracteres",
           maxLength(12)
         ),
       },
@@ -1240,14 +1240,14 @@ const submitForm = async () => {
         countryCode.value + sample_form.info.account.tel;
       countryCodeError.value = null;
     } else {
-      countryCodeError.value = "El codigo de país de necesario";
+      countryCodeError.value = "El código de país de necesario";
       modalStore.resetModal();
       return;
     }
   }
 
   if (result) {
-    // If everithing is ok, call postForm
+    // If everything is ok, call postForm
     await postForm();
     // Reset modal
     modalStore.resetModal();

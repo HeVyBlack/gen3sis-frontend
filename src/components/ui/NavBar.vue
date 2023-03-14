@@ -70,7 +70,7 @@
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item" @click="authSotre.logOut">Salir</a>
+                    <a class="dropdown-item" @click="authStore.logOut">Salir</a>
                   </li>
                 </ul>
               </li>
@@ -139,13 +139,13 @@ import { useAuthStore } from "../../stores/auth";
 import { storeToRefs } from "pinia";
 
 // State
-const authSotre = useAuthStore();
+const authStore = useAuthStore();
 
 // Ref user and staff_token from auth store
-const { user, staff_token } = storeToRefs(authSotre);
+const { user, staff_token } = storeToRefs(authStore);
 
 // Methods
-authSotre.logOut;
+authStore.logOut;
 </script>
 
 <style scoped>

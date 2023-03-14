@@ -18,7 +18,7 @@
         v-model="userEmail.email"
       />
       <div id="emailHelp" class="form-text">
-        Ingreso tu email, para restaurar la contraseña
+        Ingresa tu email, para restaurar la contraseña
       </div>
     </div>
     <button type="submit" class="btn btn-primary bg-dark">Restaurar</button>
@@ -56,7 +56,7 @@ const restorePass = async () => {
       .then((res) => {
         if (res.data) {
           alertStore.setAlert("alert-success", [
-            res.data.success_msg || "Peticón recibida",
+            res.data.success_msg || "Petición recibida",
           ]);
         }
         router.push("/");

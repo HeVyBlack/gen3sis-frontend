@@ -12,7 +12,7 @@
       </div>
       <div class="col-sm-12 col-md-6">
         <h1 id="tittle" class="pt-5 pb-3">
-          Ingenieria <font-awesome-icon icon="fa-solid fa-user-gear" />
+          Ingeniería <font-awesome-icon icon="fa-solid fa-user-gear" />
           <p>¡Bienvenido Ingeniero!</p>
         </h1>
         <router-view class="p-sm-3 p-md-5" />

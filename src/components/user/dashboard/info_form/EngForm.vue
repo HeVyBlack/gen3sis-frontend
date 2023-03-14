@@ -516,7 +516,7 @@
               v-model="formData.exp_plat.cyber_security"
             />
             <label class="form-check-label" for="cyber_security">
-              Ciberseguridad
+              Ciber-Seguridad
             </label>
           </div>
           <div class="form-check">
@@ -894,8 +894,8 @@ import router from "../../../../router";
 
 // --> State <--
 const modalStore = useModalStore();
-const alertSotre = useAlertStore();
-const authstore = useAuthStore();
+const alertStore = useAlertStore();
+const authStore = useAuthStore();
 
 const checkbox = ref(null);
 
@@ -931,60 +931,60 @@ const exp_plat_value_error = ref(null);
 // Cert value, this, will contains the cert input
 const cert_value = ref(null);
 
-// Rulse for vuelidate
+// Rules for vuelidate
 const rules = {
   name: {
     required: helpers.withMessage("El nombre debe de ser requerido", required),
     minLength: helpers.withMessage(
-      "El nombre debe tener al menos 3 carácteres",
+      "El nombre debe tener al menos 3 caracteres",
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "El nombre debe de ser menor a 80 carácteres",
+      "El nombre debe de ser menor a 80 caracteres",
       maxLength(80)
     ),
   },
   last_name: {
     required: helpers.withMessage("El apellido es requerido", required),
     minLength: helpers.withMessage(
-      "El nombre debe tener al menos 3 carácteres",
+      "El nombre debe tener al menos 3 caracteres",
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "El apellido debe de ser menor a 80 carácteres",
+      "El apellido debe de ser menor a 80 caracteres",
       maxLength(80)
     ),
   },
   city: {
     required: helpers.withMessage("La ciudad es requerida", required),
     minLength: helpers.withMessage(
-      "La ciudad debe contener al menos 3 carácteres",
+      "La ciudad debe contener al menos 3 caracteres",
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "La ciudad debe de ser menor a 80 carácteres",
+      "La ciudad debe de ser menor a 80 caracteres",
       maxLength(80)
     ),
   },
   country: {
     required: helpers.withMessage("El país es requerido", required),
     minLength: helpers.withMessage(
-      "El país debe contener al menos 3 carácteres",
+      "El país debe contener al menos 3 caracteres",
       minLength(3)
     ),
     maxLength: helpers.withMessage(
-      "La ciudad debe de ser menor a 40 carácteres",
+      "La ciudad debe de ser menor a 40 caracteres",
       maxLength(40)
     ),
   },
   tel: {
     required: helpers.withMessage("El teléfono es requerido", required),
     minLength: helpers.withMessage(
-      "El teléfono debe contener al menos 10 carácteres",
+      "El teléfono debe contener al menos 10 caracteres",
       minLength(10)
     ),
     maxLength: helpers.withMessage(
-      "El teléfono debe de ser menor a 12 carácteres",
+      "El teléfono debe de ser menor a 12 caracteres",
       maxLength(12)
     ),
   },
@@ -994,11 +994,11 @@ const rules = {
   exp: {
     required: helpers.withMessage("Tu experiencia es requerido", required),
     minLength: helpers.withMessage(
-      "Tu experiencia debe tener al menos 20 carácteres",
+      "Tu experiencia debe tener al menos 20 caracteres",
       minLength(20)
     ),
     maxLength: helpers.withMessage(
-      "Tu experiencia debe tener menos de 3000 carácteres",
+      "Tu experiencia debe tener menos de 3000 caracteres",
       maxLength(3000)
     ),
   },
@@ -1027,7 +1027,7 @@ const rules = {
   },
   certs: {
     maxLength: helpers.withMessage(
-      "Los certificados deben de ser menor a 14 carácteres",
+      "Los certificados deben de ser menor a 14 caracteres",
       maxLength(14)
     ),
   },
@@ -1065,7 +1065,7 @@ const submitForm = async () => {
   if (formData.value.exp_plat.other) {
     if (exp_plat_value.value.length < 3 || exp_plat_value.value.length > 80) {
       exp_plat_value_error.value =
-        "El valor debe estar entre 3 y 80 carácteres";
+        "El valor debe estar entre 3 y 80 caracteres";
       modalStore.resetModal();
       return;
     } else {
@@ -1094,16 +1094,16 @@ const postForm = async () => {
   await axios
     .post("eng/post-infoform", formToSubmit)
     .then(async (res) => {
-      // Set an alert with res.ddta
-      alertSotre.setAlert("alert-success", res.data);
+      // Set an alert with res.data
+      alertStore.setAlert("alert-success", res.data);
       // Refresh authStore's state
-      await authstore.refreshSate();
+      await authStore.refreshSate();
       // Push user to index
       router.push("/");
     })
     .catch((err) => {
       // If there's any error, set an alert with err.response.data
-      alertSotre.setAlert("alert-danger", err.response.data);
+      alertStore.setAlert("alert-danger", err.response.data);
     });
   modalStore.resetModal();
 };
@@ -1122,8 +1122,8 @@ const saveCerts = () => {
     // And, set the alert to null
     cert_value_error.value = null;
   } else if (cert_value.value && cert_value.value.length > 80) {
-    // If input has more than 14 characteres, set an alert
-    cert_value_error.value = "El certificado debe ser menos a 80 digítos*";
+    // If input has more than 14 characters, set an alert
+    cert_value_error.value = "El certificado debe ser menos a 80 dígitos*";
   }
 };
 const clearCerts = () => {

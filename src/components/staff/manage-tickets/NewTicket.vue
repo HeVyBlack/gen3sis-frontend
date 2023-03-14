@@ -19,7 +19,7 @@
                 type="text"
                 :name="`eng_${index}`"
                 :id="`eng_${index}`"
-                placeholder="Email o Codigo"
+                placeholder="Email o Código"
                 :value="engs[index]"
                 @input="($event) => handleInput($event, index)"
               />
@@ -44,7 +44,7 @@
         </li>
         <li class="mb-3">
           <label for="part" class="mx-3"
-            ><strong>Codigo/Email Partner</strong></label
+            ><strong>Código/Email Partner</strong></label
           >
           <input
             type="text"
@@ -56,7 +56,7 @@
         </li>
         <li class="mb-3">
           <label for="make_date" class="mx-3"
-            ><strong>Fecha de creacion del ticket</strong></label
+            ><strong>Fecha de creación del ticket</strong></label
           >
           <input
             id="make_date"
@@ -109,7 +109,7 @@
         </li>
         <li class="mb-3">
           <label for="desc" class="mx-3"
-            ><strong>Ingresa la descripcion</strong></label
+            ><strong>Ingresa la descripción</strong></label
           >
           <ul>
             <li>

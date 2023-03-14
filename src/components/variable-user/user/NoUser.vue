@@ -33,7 +33,7 @@
                 </h3>
               </div>
               <p>
-                Inicia seisón como Ingeniero
+                Inicia sesión como Ingeniero
                 <font-awesome-icon icon="fa-solid fa-chevron-right" />
               </p>
             </div>
@@ -50,7 +50,7 @@
                 </h3>
               </div>
               <p>
-                Inicia seisón como partner
+                Inicia sesión como partner
                 <font-awesome-icon icon="fa-solid fa-chevron-right" />
               </p></div
           ></router-link>

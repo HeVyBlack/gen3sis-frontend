@@ -757,7 +757,7 @@
                 v-model="formData.info.exp_plat.cyber_security"
               />
               <label class="form-check-label" for="cyber_security">
-                Ciberseguridad
+                Ciber-Seguridad
               </label>
             </div>
             <div class="form-check">
@@ -1034,7 +1034,7 @@ const rules = {
   password: {
     requiredIf: helpers.withMessage("La contraseña es requerida", required),
     minLength: helpers.withMessage(
-      "La contraseña debe contenerl un minimo de 8 caractres",
+      "La contraseña debe contener un mínimo de 8 caracteres",
       minLength(8)
     ),
     maxLength: helpers.withMessage(
@@ -1051,11 +1051,11 @@ const rules = {
         })
       ),
       minLength: helpers.withMessage(
-        "El nombre debe tener al menos 3 carácteres",
+        "El nombre debe tener al menos 3 caracteres",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "El nombre debe de ser menor a 80 carácteres",
+        "El nombre debe de ser menor a 80 caracteres",
         maxLength(80)
       ),
     },
@@ -1067,11 +1067,11 @@ const rules = {
         })
       ),
       minLength: helpers.withMessage(
-        "El nombre debe tener al menos 3 carácteres",
+        "El nombre debe tener al menos 3 caracteres",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "El apellido debe de ser menor a 80 carácteres",
+        "El apellido debe de ser menor a 80 caracteres",
         maxLength(80)
       ),
     },
@@ -1083,11 +1083,11 @@ const rules = {
         })
       ),
       minLength: helpers.withMessage(
-        "La ciudad debe contener al menos 3 carácteres",
+        "La ciudad debe contener al menos 3 caracteres",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "La ciudad debe de ser menor a 80 carácteres",
+        "La ciudad debe de ser menor a 80 caracteres",
         maxLength(80)
       ),
     },
@@ -1099,11 +1099,11 @@ const rules = {
         })
       ),
       minLength: helpers.withMessage(
-        "El país debe contener al menos 3 carácteres",
+        "El país debe contener al menos 3 caracteres",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "La ciudad debe de ser menor a 40 carácteres",
+        "La ciudad debe de ser menor a 40 caracteres",
         maxLength(40)
       ),
     },
@@ -1115,11 +1115,11 @@ const rules = {
         })
       ),
       minLength: helpers.withMessage(
-        "El teléfono debe contener al menos 10 carácteres",
+        "El teléfono debe contener al menos 10 caracteres",
         minLength(10)
       ),
       maxLength: helpers.withMessage(
-        "El teléfono debe de ser menor a 12 carácteres",
+        "El teléfono debe de ser menor a 12 caracteres",
         maxLength(12)
       ),
     },
@@ -1139,11 +1139,11 @@ const rules = {
         })
       ),
       minLength: helpers.withMessage(
-        "Tu experiencia debe tener al menos 20 carácteres",
+        "Tu experiencia debe tener al menos 20 caracteres",
         minLength(20)
       ),
       maxLength: helpers.withMessage(
-        "Tu experiencia debe tener menos de 3000 carácteres",
+        "Tu experiencia debe tener menos de 3000 caracteres",
         maxLength(3000)
       ),
     },
@@ -1179,7 +1179,7 @@ const rules = {
     },
     certs: {
       maxLength: helpers.withMessage(
-        "Los certificados deben de ser menor a 14 carácteres",
+        "Los certificados deben de ser menor a 14 caracteres",
         maxLength(14)
       ),
     },
@@ -1227,7 +1227,7 @@ const submitForm = async () => {
   if (formData.value.info.exp_plat.other) {
     if (exp_plat_value.value.length < 3 || exp_plat_value.value.length > 80) {
       exp_plat_value_error.value =
-        "El valor debe estar entre 3 y 80 carácteres";
+        "El valor debe estar entre 3 y 80 caracteres";
       modalStore.resetModal();
       return;
     } else {
@@ -1289,8 +1289,8 @@ const saveCerts = () => {
     // And, set the alert to null
     cert_value_error.value = null;
   } else if (cert_value.value && cert_value.value.length > 80) {
-    // If input has more than 14 characteres, set an alert
-    cert_value_error.value = "El certificado debe ser menos a 80 digítos*";
+    // If input has more than 14 characters, set an alert
+    cert_value_error.value = "El certificado debe ser menos a 80 dígitos*";
   }
 };
 const clearCerts = () => {

@@ -21,7 +21,7 @@
             <input
               type="number"
               name="num_ticket"
-              id="num_tikcet"
+              id="num_ticket"
               required
               max="9999"
               min="0"
@@ -124,7 +124,7 @@
           </li>
           <li>
             <label for="link_record"
-              >Ingresa el link de la grabacion
+              >Ingresa el link de la grabación
               <strong class="text-danger">*</strong></label
             >
             <input
@@ -138,12 +138,12 @@
           </li>
           <li>
             <label for="rel_case"
-              >Resolucion del caso <strong class="text-danger">*</strong></label
+              >Resolución del caso <strong class="text-danger">*</strong></label
             >
             <textarea
               cols="35"
               rows="3"
-              placeholder="Resolucion"
+              placeholder="Resolución"
               name="rel_case"
               id="rel_case"
               minlength="3"
@@ -154,7 +154,7 @@
           </li>
           <li>
             <label for="case_state"
-              >Ingrea el estado del caso
+              >Ingresa el estado del caso
               <strong class="text-danger">*</strong></label
             >
             <select
@@ -169,7 +169,7 @@
           </li>
           <li>
             <label for="files"
-              >Ingrea los archivos <strong class="text-danger">*</strong></label
+              >Ingresa los archivos <strong class="text-danger">*</strong></label
             >
             <input
               type="file"

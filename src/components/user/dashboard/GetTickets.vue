@@ -83,16 +83,16 @@
                   </li>
                   <li class="list-group-item">Partner: {{ ticket.part }}</li>
                   <li class="list-group-item">
-                    Fecha de creacion: {{ ticket.make_date }}
+                    Fecha de creación: {{ ticket.make_date }}
                   </li>
                   <li class="list-group-item">
-                    Fecha de ciere: {{ ticket.close_date }}
+                    Fecha de cierre: {{ ticket.close_date }}
                   </li>
                   <li class="list-group-item">
                     Tiempo: {{ ticket.time || 0 }}
                   </li>
                   <li class="list-group-item">
-                    Stado: {{ ticket.state === false ? "Abierto" : "Cerrado" }}
+                    Estado: {{ ticket.state === false ? "Abierto" : "Cerrado" }}
                   </li>
                   <li class="list-group-item">
                     <textarea
@@ -145,7 +145,7 @@
               <li>Actividades realizadas: {{ report.activities }}</li>
               <li>Hallazgos adicionales: {{ report.addi_find }}</li>
               <li>
-                Link a la grabacion:
+                Link a la grabación:
                 <a
                   class="text-primary"
                   :href="report.link_record"
@@ -154,7 +154,7 @@
                   >Link</a
                 >
               </li>
-              <li>Resolucion del caso: {{ report.rel_case }}</li>
+              <li>Resolución del caso: {{ report.rel_case }}</li>
               <li>
                 Estado del caso:
                 {{ report.case_state ? "Cerrado" : "Aun abierto" }}

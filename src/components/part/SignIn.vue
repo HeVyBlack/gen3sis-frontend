@@ -96,11 +96,11 @@ const rules = {
   password: {
     required: helpers.withMessage("La contraseña es requerida", required),
     minLength: helpers.withMessage(
-      "La contraseña debe contener al menos 8 carácteres",
+      "La contraseña debe contener al menos 8 caracteres",
       minLength(8)
     ),
     maxLength: helpers.withMessage(
-      "La contraseña debe tener menos de 14 carácteres",
+      "La contraseña debe tener menos de 14 caracteres",
       maxLength(14)
     ),
   },
@@ -115,7 +115,7 @@ const submitAuthForm = async () => {
   modalStore.setType("wait_offcanvas");
   // Const that contains vuelidate check
   const result = await v$.value.$validate();
-  // Check if everithing is alright
+  // Check if everything is alright
   if (result) {
     await axios
       .post("/part/sign-in", formData.value)

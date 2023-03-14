@@ -18,7 +18,7 @@
             aria-label="Default select example"
             v-model="formData.account.activity"
           >
-            <option :value="null" selected>Selcciona tu actividad</option>
+            <option :value="null" selected>Selecciona tu actividad</option>
             <option
               selected
               v-for="(item, index) in activity"
@@ -98,7 +98,7 @@
                 aria-label="Default select example"
                 v-model="countryCode"
               >
-                <option value="0">Codigo país</option>
+                <option value="0">Código país</option>
                 <option data-countryCode="DZ" value="213">
                   Algeria (+213)
                 </option>
@@ -829,8 +829,8 @@ import router from "../../../../router";
 
 // --> State <--
 const modalStore = useModalStore();
-const alertSotre = useAlertStore();
-const authstore = useAuthStore();
+const alertStore = useAlertStore();
+const authStore = useAuthStore();
 
 const checkbox = ref(null);
 
@@ -866,39 +866,39 @@ const rules = {
     r_social: {
       required: helpers.withMessage("La razón social es requerida", required),
       minLength: helpers.withMessage(
-        "La razón social debe contener al menos 3 carácteres",
+        "La razón social debe contener al menos 3 caracteres",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "La razón social debe contener menos 80 carácteres",
+        "La razón social debe contener menos 80 caracteres",
         maxLength(80)
       ),
     },
     nit: {
       required: helpers.withMessage("El nit es requerido", required),
       minLength: helpers.withMessage(
-        "El nit contener al menos 8 carácteres",
+        "El nit contener al menos 8 caracteres",
         minLength(8)
       ),
       maxLength: helpers.withMessage(
-        "El nit debe contener menos de 15 carácteres",
+        "El nit debe contener menos de 15 caracteres",
         maxLength(15)
       ),
     },
     tel: {
       required: helpers.withMessage("El teléfono es requerido", required),
       minLength: helpers.withMessage(
-        "El teléfono contener al menos 10 carácteres",
+        "El teléfono contener al menos 10 caracteres",
         minLength(10)
       ),
       maxLength: helpers.withMessage(
-        "El teléfono debe contener menos de 14 carácteres",
+        "El teléfono debe contener menos de 14 caracteres",
         maxLength(12)
       ),
     },
     ext: {
       maxLength: helpers.withMessage(
-        "La extensión debe contener menos de 6 carácteres",
+        "La extensión debe contener menos de 6 caracteres",
         maxLength(6)
       ),
     },
@@ -907,33 +907,33 @@ const rules = {
     pos: {
       required: helpers.withMessage("La posición es requerida", required),
       minLength: helpers.withMessage(
-        "La posición debe tener al menos 3 carácteres ",
+        "La posición debe tener al menos 3 caracteres ",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "La posición debe tener menos de 80 carácteres ",
+        "La posición debe tener menos de 80 caracteres ",
         maxLength(80)
       ),
     },
     name: {
       required: helpers.withMessage("El nombre es requerido", required),
       minLength: helpers.withMessage(
-        "El nombre debe tener al menos 3 carácteres",
+        "El nombre debe tener al menos 3 caracteres",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "El nombre debe tener menos de 15 carácteres",
+        "El nombre debe tener menos de 15 caracteres",
         maxLength(15)
       ),
     },
     last_name: {
       required: helpers.withMessage("El apellido es requerido", required),
       minLength: helpers.withMessage(
-        "El apellido debe tener al menos 3 carácteres",
+        "El apellido debe tener al menos 3 caracteres",
         minLength(3)
       ),
       maxLength: helpers.withMessage(
-        "El apellido debe tener menos de 15 carácteres",
+        "El apellido debe tener menos de 15 caracteres",
         maxLength(15)
       ),
     },
@@ -944,11 +944,11 @@ const rules = {
     tel: {
       required: helpers.withMessage("El teléfono es requerido", required),
       minLength: helpers.withMessage(
-        "El teléfono debe tener al menos 10 carácteres",
+        "El teléfono debe tener al menos 10 caracteres",
         minLength(10)
       ),
       maxLength: helpers.withMessage(
-        "El teléfono debe tener menos de 12 carácteres",
+        "El teléfono debe tener menos de 12 caracteres",
         maxLength(12)
       ),
     },
@@ -994,7 +994,7 @@ const submitForm = async () => {
     sample_form.account.tel = countryCode.value + sample_form.account.tel;
     countryCodeError.value = null;
   } else {
-    countryCodeError.value = "El codigo de país de necesario";
+    countryCodeError.value = "El código de país de necesario";
     modalStore.resetModal();
     return;
   }
@@ -1014,19 +1014,19 @@ const postForm = async () => {
     .post("part/post-infoform", sample_form)
     .then(async (res) => {
       // Set an alert, with res.data
-      alertSotre.setAlert("alert-success", res.data);
+      alertStore.setAlert("alert-success", res.data);
       // Refresh authStore
-      await authstore.refreshSate();
+      await authStore.refreshSate();
       // Push user to index
       router.push("/");
     })
     .catch((err) => {
       // If there's an error_msg, set an alert
       if (err.response.data.error_msg) {
-        alertSotre.setAlert("alert-danger", err.response.data);
+        alertStore.setAlert("alert-danger", err.response.data);
       } else {
         console.error(err);
-        alertSotre.setAlert("alert-danger", ["Hubo un error"]); // Else, set an alert
+        alertStore.setAlert("alert-danger", ["Hubo un error"]); // Else, set an alert
       }
     });
 };

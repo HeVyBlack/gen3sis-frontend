@@ -98,11 +98,11 @@ const rules = {
   password: {
     required: helpers.withMessage("La contraseña es requerida", required),
     minLength: helpers.withMessage(
-      "La contraseña debe contener al menos 8 carácteres",
+      "La contraseña debe contener al menos 8 caracteres",
       minLength(8)
     ),
     maxLength: helpers.withMessage(
-      "La contraseña debe tener menos de 14 carácteres",
+      "La contraseña debe tener menos de 14 caracteres",
       maxLength(14)
     ),
   },

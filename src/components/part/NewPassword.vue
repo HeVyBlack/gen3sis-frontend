@@ -70,22 +70,22 @@ const rules = computed(() => {
     password: {
       required: helpers.withMessage("Contraseña es necesaria", required),
       minLength: helpers.withMessage(
-        "La contraseña debe tener al menos 8 carácteres",
+        "La contraseña debe tener al menos 8 caracteres",
         minLength(8)
       ),
       maxLength: helpers.withMessage(
-        "La contraseña debe tener menos de 80 carácteres",
+        "La contraseña debe tener menos de 80 caracteres",
         maxLength(80)
       ),
     },
     confirm_password: {
       required: helpers.withMessage("Confirma tu contraseña", required),
       minLength: helpers.withMessage(
-        "La contraseña debe tener al menos 8 carácteres",
+        "La contraseña debe tener al menos 8 caracteres",
         minLength(8)
       ),
       maxLength: helpers.withMessage(
-        "La contraseña debe tener menos de 80 carácteres",
+        "La contraseña debe tener menos de 80 caracteres",
         maxLength(80)
       ),
       sameAs: helpers.withMessage(
@@ -108,7 +108,7 @@ const saveNewPassword = async () => {
       .then((res) => {
         if (res.data) {
           alertStore.setAlert("alert-success", [
-            res.data.success_msg || "Peticón recibida",
+            res.data.success_msg || "Petición recibida",
           ]);
         }
         router.push("/");

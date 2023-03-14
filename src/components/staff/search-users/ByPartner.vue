@@ -5,7 +5,7 @@
       <div class="row px-3">
         <div class="col-sm-3 col-lg-3">
           <div class="my-3">
-            <h6><strong>¿Codigo?</strong></h6>
+            <h6><strong>¿Código?</strong></h6>
             <input
               type="number"
               class="form-control"
@@ -350,7 +350,7 @@ const getUsers = async () => {
 
   // Set offcanvas
   modalStore.setType("wait_offcanvas");
-  // Basics querys (type, verified email, and verified info)
+  // Basics query's (type, verified email, and verified info)
 
   if (typeof formData.value.verified_email === "boolean") {
     url = url + `verified_email=${formData.value.verified_email}&`;
@@ -369,24 +369,24 @@ const getUsers = async () => {
 
   // If type is partner
   // Make a for in, in partner account section
-  for (const propery in formData.value.account) {
+  for (const i in formData.value.account) {
     // If value is not a null
-    if (formData.value.account[propery]) {
+    if (formData.value.account[i]) {
       // Set it in url
-      url = url + `info.account.${propery}=${formData.value.account[propery]}&`;
+      url = url + `info.account.${i}=${formData.value.account[i]}&`;
     }
   }
 
   // Make a for in, in partner cont section
-  for (const propery in formData.value.cont) {
+  for (const i in formData.value.cont) {
     // If value is not a null
-    if (formData.value.cont[propery]) {
+    if (formData.value.cont[i]) {
       // Set it in url
-      url = url + `info.cont.${propery}=${formData.value.cont[propery]}&`;
+      url = url + `info.cont.${i}=${formData.value.cont[i]}&`;
     }
   }
 
-  // Send the url, with querys
+  // Send the url, with query's
   await axios
     .get(url)
     .then((res) => {
@@ -422,7 +422,7 @@ const changePage = async (page) => {
   });
   // Reset modal
   modalStore.resetModal();
-  // If there's users found, set paginateOptios, and set users found in users const
+  // If there's users found, set paginate options, and set users found in users const
   if (res.data.docs.length > 0) {
     for (const i in res.data) {
       if (i == "docs") {

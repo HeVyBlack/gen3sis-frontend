@@ -5,7 +5,7 @@
       <div class="row px-3">
         <div class="col-sm-3 col-lg-3">
           <div class="my-3">
-            <h6><strong>¿Codigo?</strong></h6>
+            <h6><strong>¿Código?</strong></h6>
             <input
               type="number"
               class="form-control"
@@ -492,7 +492,7 @@
                     v-model="formData.engineer.exp_plat.cyber_security"
                   />
                   <label class="form-check-label" for="cyber_security">
-                    Ciber seguridad
+                    Ciber-Seguridad
                   </label>
                 </div>
                 <div class="form-check">
@@ -654,7 +654,7 @@
                   <li class="list-group-item">Ciudad: {{ item.info.city }}</li>
                   <li class="list-group-item">Nivel: {{ item.info.level }}</li>
                   <li class="list-group-item">
-                    Experiencia en direción de proyectos:
+                    Experiencia en dirección de proyectos:
                     {{ item.info.exp_in_pro_dir }}
                   </li>
                   <li class="list-group-item">
@@ -813,7 +813,7 @@ const changePage = async (page) => {
   });
   // Reset modal
   modalStore.resetModal();
-  // If there's users found, set paginateOptios, and set users found in users const
+  // If there's users found, set paginate options, and set users found in users const
   if (res.data.docs.length > 0) {
     for (const i in res.data) {
       if (i == "docs") {

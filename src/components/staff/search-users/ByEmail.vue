@@ -241,7 +241,7 @@
               <div v-for="(item, index) in user.pets" :key="index">
                 <ul class="list-group">
                   <li class="list-group-item">
-                    Codigo de petición: {{ item.pet }}
+                    Código de petición: {{ item.pet }}
                   </li>
                   <li class="list-group-item">Mensaje: {{ item.msg }}</li>
                 </ul>

@@ -13,12 +13,12 @@ export const useAuthStore = defineStore({
   }),
   actions: {
     async refreshSate() {
-      // When refresSate is call, it call attemp, to refresh state
-      await this.attemp(this.token);
+      // When refreshSate is call, it call attempt, to refresh state
+      await this.attempt(this.token);
     },
     async saveToken(token, staff_token) {
-      // Call attemp method, with the token
-      if (token) await this.attemp(token);
+      // Call attempt method, with the token
+      if (token) await this.attempt(token);
       // If res has an staff_token
       // Set staff_token
       // If staff_token exists
@@ -29,12 +29,12 @@ export const useAuthStore = defineStore({
         router.push({ name: "staff" });
       } else router.push({ name: "index" }); // Else, push user to index
     },
-    async attemp(token) {
-      // If recieves an token
+    async attempt(token) {
+      // If receives an token
       if (token) {
         // Save it in store
         this.token = token;
-        // Set to axios defaults headers (to send it everytime)
+        // Set to axios defaults headers (to send it every time)
         axios.defaults.headers.common = {
           Authorization: `Bearer ${token}`,
         };
@@ -43,7 +43,7 @@ export const useAuthStore = defineStore({
       }
       // If doesn't exist
       if (!this.token) {
-        // Delete it from axios headres
+        // Delete it from axios headers
         delete axios.defaults.headers.Authorization;
         // Delete it from local storage
         localStorage.removeItem("token");
@@ -73,7 +73,7 @@ export const useAuthStore = defineStore({
       }
     },
     saveStaff(token) {
-      // If recieves a token
+      // If receives a token
       if (token) {
         // Save it in staff_token const
         this.staff_token = token;
@@ -104,8 +104,8 @@ export const useAuthStore = defineStore({
       // Remove from local storage, normal token and staff token
       localStorage.removeItem("token");
       localStorage.removeItem("staff_token");
-      // Call attemp function (this, to reset everything)
-      this.attemp();
+      // Call attempt function (this, to reset everything)
+      this.attempt();
       // Redirect to home
       router.replace({ name: "index" });
     },

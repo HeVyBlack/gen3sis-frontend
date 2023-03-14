@@ -3,7 +3,7 @@
     <div>
       <div class="mb-3">
         <h4><strong>Buscar Tickets</strong></h4>
-        <label for="cod_ing" class="form-label">Códgio de ingeniero</label>
+        <label for="cod_ing" class="form-label">Código de ingeniero</label>
         <div
           id="emailHelp"
           class="form-text error"
@@ -186,14 +186,14 @@
                 </li>
                 <li class="list-group-item">Partner: {{ ticket.part }}</li>
                 <li class="list-group-item">
-                  Fecha de Creacion: {{ ticket.make_date }}
+                  Fecha de Creación: {{ ticket.make_date }}
                 </li>
                 <li class="list-group-item">
                   Fecha de Cierre: {{ ticket.close_date }}
                 </li>
                 <li class="list-group-item">Tiempo: {{ ticket.time || 0 }}</li>
                 <li class="list-group-item">
-                  Stado: {{ ticket.state === false ? "Abierto" : "Cerrado" }}
+                  Estado: {{ ticket.state === false ? "Abierto" : "Cerrado" }}
                 </li>
                 <li class="list-group-item">Descripción: {{ ticket.desc }}</li>
                 <li class="list-group-item">
@@ -344,7 +344,7 @@
               <li>Actividades realizadas: {{ report.activities }}</li>
               <li>Hallazgos adicionales: {{ report.addi_find }}</li>
               <li>
-                Link a la grabacion:
+                Link a la grabación:
                 <a
                   class="text-primary"
                   :href="report.link_record"
@@ -353,7 +353,7 @@
                   >Link</a
                 >
               </li>
-              <li>Resolucion del caso: {{ report.rel_case }}</li>
+              <li>Resolución del caso: {{ report.rel_case }}</li>
               <li>
                 Estado del caso:
                 {{ report.case_state ? "Cerrado" : "Aun abierto" }}
@@ -406,21 +406,21 @@ const alertStore = useAlertStore();
 const rules = {
   cod_eng: {
     minLength: helpers.withMessage(
-      "El código de ingeniero no puede ser menor a 10 digítos",
+      "El código de ingeniero no puede ser menor a 10 dígitos",
       minLength(10)
     ),
     maxLength: helpers.withMessage(
-      "El código de ingeniero no puede ser mayor a 10 digítos",
+      "El código de ingeniero no puede ser mayor a 10 dígitos",
       maxLength(10)
     ),
   },
   cod_part: {
     minLength: helpers.withMessage(
-      "El código de partner no puede ser menor a 10 digítos",
+      "El código de partner no puede ser menor a 10 dígitos",
       minLength(10)
     ),
     maxLength: helpers.withMessage(
-      "El código de partner no puede ser mayor a 10 digítos",
+      "El código de partner no puede ser mayor a 10 dígitos",
       maxLength(10)
     ),
   },
@@ -547,7 +547,7 @@ const editRules = {
   },
   desc: {
     maxLength: helpers.withMessage(
-      "La descripción debe ser menor a 80 carácteres es requerida",
+      "La descripción debe ser menor a 80 caracteres es requerida",
       maxLength(80)
     ),
   },

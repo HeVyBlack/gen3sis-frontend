@@ -7,7 +7,7 @@ export const useAlertStore = defineStore({
     content: null,
   }),
   actions: {
-    // Set alert function, it recieve two params, type and content
+    // Set alert function, it receive two params, type and content
     setAlert(type, content) {
       // If, type and content exists, set it in state
       if (type && content) {

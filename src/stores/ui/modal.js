@@ -6,7 +6,7 @@ export const useModalStore = defineStore({
     type: null,
   }),
   actions: {
-    // Set modal, it only recieves one param (type of off canvas)
+    // Set modal, it only receives one param (type of off canvas)
     setType(type) {
       // If type exists
       if (type) {
@@ -19,7 +19,7 @@ export const useModalStore = defineStore({
     },
   },
   getters: {
-    // Get off canva's type
+    // Get of type
     getType: (state) => state.type,
   },
 });

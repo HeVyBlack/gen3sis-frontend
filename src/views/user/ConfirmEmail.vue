@@ -40,14 +40,14 @@ import { useRoute } from "vue-router";
 import router from "../../router";
 // Stores
 // --> State <--
-// Our litte msg array
+// Our little msg array
 const msg = ref([{}]);
 // useRout, for get token from url
 const route = useRoute();
 onMounted(async () => {
   // If token exist, send it
   if (route.query.token) {
-    // Const that contais backend's response
+    // Const that contains backend's response
     await axios
       .post(`user/confirm-email?token=${route.query.token}`)
       .then((res) => {
